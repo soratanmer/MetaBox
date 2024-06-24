@@ -50,14 +50,7 @@ const domesticNameservers = [
   
   // 程序入口
   function main(config) {
-    const proxyCount = config?.proxies?.length ?? 0;
-    const proxyProviderCount =
-      typeof config?.["proxy-providers"] === "object" ? Object.keys(config["proxy-providers"]).length : 0;
-    if (proxyCount === 0 && proxyProviderCount === 0) {
-      throw new Error("配置文件中未找到任何代理");
-    }
-  
-    // 覆盖原配置中DNS配置
+// 覆盖原配置中DNS配置
     config["dns"] = dnsConfig;
   
     // 返回修改后的配置

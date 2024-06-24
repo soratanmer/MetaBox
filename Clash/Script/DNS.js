@@ -7,10 +7,10 @@ const domesticNameservers = [
   
   // 国外DNS服务器
   const foreignNameservers = [
+    "https://8.8.8.8/dns-query", // Google(主)
+    "https://8.8.4.4/dns-query", // Google(备)
     "https://1.1.1.1/dns-query", // Cloudflare(主)
     "https://1.0.0.1/dns-query", // Cloudflare(备)
-    "https://8.8.8.8/dns-query", // Cloudflare(主)
-    "https://8.8.4.4/dns-query", // Cloudflare(备)
     "https://208.67.222.222/dns-query", // OpenDNS(主)
     "https://208.67.220.220/dns-query", // OpenDNS(备)
     "https://194.242.2.2/dns-query", // Mullvad(主)
@@ -39,7 +39,7 @@ const domesticNameservers = [
       // 微信快速登录检测失败
       "localhost.work.weixin.qq.com"
     ],
-    "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8"],
+    "default-nameserver": ["8.8.8.8", "1.1.1.1"，"223.5.5.5", "119.29.29.29"],
     "nameserver": [...domesticNameservers, ...foreignNameservers],
     "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
     "nameserver-policy": {
@@ -50,7 +50,7 @@ const domesticNameservers = [
   
   // 程序入口
   function main(config) {
-// 覆盖原配置中DNS配置
+    // 覆盖原配置中DNS配置
     config["dns"] = dnsConfig;
   
     // 返回修改后的配置

@@ -148,7 +148,7 @@ rule-providers:
     behavior: classical
     format: text
     path: ./rules/applications.list
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/applications.list"
+    url: "https://raw.githubusercontent.com/soratanmer/ACL4SSR/main/Clash/Rules/applications.list"
     interval: 86400
   BanAD:
     type: http

@@ -7,6 +7,7 @@ log-level: info
 ipv6: true
 secret: '0513'
 external-controller: 127.0.0.1:51225
+
 dns:
   enable: true
   listen: 0.0.0.0:1053
@@ -67,6 +68,7 @@ dns:
     - https://194.242.2.2/dns-query
     - https://194.242.2.3/dns-query
   fallback: []
+
 tun:
   stack: gvisor
   device: Meta
@@ -124,11 +126,13 @@ proxy-groups:
   - {name: 🌏 国内媒体, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
   - {name: Ⓜ️ 微软服务, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
   - {name: 🍎 苹果服务, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 📢 谷歌FCM, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
+  - {name: 🎮 游戏平台, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
 
   - {name: 🛑 广告拦截, type: select, proxies: [REJECT, DIRECT]}
   - {name: 🎯 全球直连, type: select, proxies: [DIRECT, 🚀 节点选择]}
+  - {name: 🖥️ 直连软件, type: select, proxies: [🎯 全球直连]}
   - {name: 🐟 漏网之鱼, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
+
 
   - {name: 🇭🇰 香港节点, type: url-test, tolerance: 50, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)港|hk|hongkong|hong kong"}
   - {name: 🇹🇼 台湾节点, type: url-test, tolerance: 50, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)台|tw|taiwan"}
@@ -138,205 +142,243 @@ proxy-groups:
 
 # 规则集
 rule-providers:
+  # 若使用 ShellCrash，由于无法判断本机进程（默认 `find-process-mode: off`），需删除此条 `applications`
+  applications:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/soratanmer/applications.list
+    url: "https://raw.githubusercontent.com/soratanmer/ACL4SSR/main/Clash/Ruleset/applications.list"
+    interval: 86400
   BanAD:
     type: http
     behavior: classical
     format: text
-    path: ./rules/BanAD.list
+    path: ./ruleset/ACL4SSR/BanAD.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
     interval: 86400
   BanProgramAD:
     type: http
     behavior: classical
     format: text
-    path: ./rules/BanProgramAD.list
+    path: ./ruleset/ACL4SSR/BanProgramAD.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
     interval: 86400
   BanEasyList:
     type: http
     behavior: classical
     format: text
-    path: ./rules/BanEasyList.list
+    path: ./ruleset/ACL4SSR/BanEasyList.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list"
     interval: 86400
   BanEasyListChina:
     type: http
     behavior: classical
     format: text
-    path: ./rules/BanEasyListChina.list
+    path: ./ruleset/ACL4SSR/BanEasyListChina.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list"
     interval: 86400
   BanEasyPrivacy:
     type: http
     behavior: classical
     format: text
-    path: ./rules/BanEasyPrivacy.list
+    path: ./ruleset/ACL4SSR/BanEasyPrivacy.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyPrivacy.list"
     interval: 86400
   LocalAreaNetwork:
     type: http
     behavior: classical
     format: text
-    path: ./rules/LocalAreaNetwork.list
+    path: ./ruleset/ACL4SSR/LocalAreaNetwork.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list"
     interval: 86400
   UnBan:
     type: http
     behavior: classical
     format: text
-    path: ./rules/UnBan.list
+    path: ./ruleset/ACL4SSR/UnBan.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list"
     interval: 86400
   GoogleCN:
     type: http
     behavior: classical
     format: text
-    path: ./rules/GoogleCN.list
+    path: ./ruleset/ACL4SSR/GoogleCN.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list"
     interval: 86400
   SteamCN:
     type: http
     behavior: classical
     format: text
-    path: ./rules/SteamCN.list
+    path: ./ruleset/ACL4SSR/SteamCN.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list"
-    interval: 86400
-  GoogleFCM:
-    type: http
-    behavior: classical
-    format: text
-    path: ./rules/GoogleFCM.list
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list"
     interval: 86400
   OneDrive:
     type: http
     behavior: classical
     format: text
-    path: ./rules/OneDrive.list
+    path: ./ruleset/ACL4SSR/OneDrive.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list"
     interval: 86400
   Microsoft:
     type: http
     behavior: classical
     format: text
-    path: ./rules/Microsoft.list
+    path: ./ruleset/ACL4SSR/Microsoft.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list"
     interval: 86400
   Apple:
     type: http
     behavior: classical
     format: text
-    path: ./rules/Apple.list
+    path: ./ruleset/ACL4SSR/Apple.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list"
     interval: 86400
   Telegram:
     type: http
     behavior: classical
     format: text
-    path: ./rules/Telegram.list
+    path: ./ruleset/ACL4SSR/Telegram.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list"
     interval: 86400
   OpenAi:
     type: http
     behavior: classical
     format: text
-    path: ./rules/OpenAi.list
+    path: ./ruleset/ACL4SSR/OpenAi.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list"
     interval: 86400
   Spotify:
     type: http
     behavior: classical
     format: text
-    path: ./rules/Spotify.list
+    path: ./ruleset/ACL4SSR/Spotify.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Spotify.list"
     interval: 86400
   NetEaseMusic:
     type: http
     behavior: classical
     format: text
-    path: ./rules/NetEaseMusic.list
+    path: ./ruleset/ACL4SSR/NetEaseMusic.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list"
+    interval: 86400
+  Epic:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/ACL4SSR/Epic.list
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list"
+    interval: 86400
+  Origin:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/ACL4SSR/Origin.list
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Origin.list"
+    interval: 86400
+  Sony:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/ACL4SSR/Sony.list
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list"
+    interval: 86400
+  Steam:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/ACL4SSR/Steam.list
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list"
+    interval: 86400
+  Nintendo:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/ACL4SSR/Nintendo.list
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Nintendo.list"
     interval: 86400
   YouTube:
     type: http
     behavior: classical
     format: text
-    path: ./rules/YouTube.list
+    path: ./ruleset/ACL4SSR/YouTube.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list"
     interval: 86400
   Netflix:
     type: http
     behavior: classical
     format: text
-    path: ./rules/Netflix.list
+    path: ./ruleset/ACL4SSR/Netflix.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list"
     interval: 86400
   Bahamut:
     type: http
     behavior: classical
     format: text
-    path: ./rules/Bahamut.list
+    path: ./ruleset/ACL4SSR/Bahamut.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list"
     interval: 86400
   BilibiliHMT:
     type: http
     behavior: classical
     format: text
-    path: ./rules/BilibiliHMT.list
+    path: ./ruleset/ACL4SSR/BilibiliHMT.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
     interval: 86400
   Bilibili:
     type: http
     behavior: classical
     format: text
-    path: ./rules/Bilibili.list
+    path: ./ruleset/ACL4SSR/Bilibili.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list"
     interval: 86400
   ChinaMedia:
     type: http
     behavior: classical
     format: text
-    path: ./rules/ChinaMedia.list
+    path: ./ruleset/ACL4SSR/ChinaMedia.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
     interval: 86400
   ProxyMedia:
     type: http
     behavior: classical
     format: text
-    path: ./rules/ProxyMedia.list
+    path: ./ruleset/ACL4SSR/ProxyMedia.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
     interval: 86400
   ProxyGFWlist:
     type: http
     behavior: classical
     format: text
-    path: ./rules/ProxyGFWlist.list
+    path: ./ruleset/ACL4SSR/ProxyGFWlist.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
     interval: 86400
   ChinaDomain:
     type: http
     behavior: classical
     format: text
-    path: ./rules/ChinaDomain.list
+    path: ./ruleset/ACL4SSR/ChinaDomain.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list"
     interval: 86400
   ChinaCompanyIp:
     type: http
     behavior: classical
     format: text
-    path: ./rules/ChinaCompanyIp.list
+    path: ./ruleset/ACL4SSR/ChinaCompanyIp.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list"
     interval: 86400
   Download:
     type: http
     behavior: classical
     format: text
-    path: ./rules/Download.list
+    path: ./ruleset/ACL4SSR/Download.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list"
     interval: 86400
 
 # 规则
 rules:
+  # 若使用 ShellCrash，由于无法判断本机进程（默认 `find-process-mode: off`），需删除此条 `RULE-SET`
+  - RULE-SET,applications,🖥️ 直连软件
   - RULE-SET,BanAD,🛑 广告拦截
   - RULE-SET,BanProgramAD,🛑 广告拦截
   - RULE-SET,BanEasyList,🛑 广告拦截
@@ -345,7 +387,6 @@ rules:
   - RULE-SET,LocalAreaNetwork,🎯 全球直连
   - RULE-SET,UnBan,🎯 全球直连
   - RULE-SET,GoogleCN,🎯 全球直连
-  - RULE-SET,GoogleFCM,📢 谷歌FCM
   - RULE-SET,OneDrive,Ⓜ️ 微软服务
   - RULE-SET,Microsoft,Ⓜ️ 微软服务
   - RULE-SET,Apple,🍎 苹果服务
@@ -353,6 +394,11 @@ rules:
   - RULE-SET,OpenAi,💬 OpenAi
   - RULE-SET,NetEaseMusic,🎶 网易音乐
   - RULE-SET,Spotify,🎶 Spotify
+  - RULE-SET,Epic,🎮 游戏平台
+  - RULE-SET,Origin,🎮 游戏平台
+  - RULE-SET,Sony,🎮 游戏平台
+  - RULE-SET,Steam,🎮 游戏平台
+  - RULE-SET,Nintendo,🎮 游戏平台
   - RULE-SET,YouTube,📹 油管视频
   - RULE-SET,Bahamut,📺 巴哈姆特
   - RULE-SET,BilibiliHMT,📺 哔哩哔哩

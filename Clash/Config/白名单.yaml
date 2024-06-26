@@ -85,7 +85,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
-    path: ./rules/ads.list
+    path: ./ruleset/DustinWin/ads.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ads.list"
     interval: 86400
 
@@ -94,7 +94,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    path: ./rules/applications.list
+    path: ./ruleset/DustinWin/applications.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/applications.list"
     interval: 86400
 
@@ -102,7 +102,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
-    path: ./rules/private.list
+    path: ./ruleset/DustinWin/private.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/private.list"
     interval: 86400
 
@@ -110,7 +110,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
-    path: ./rules/microsoft-cn.list
+    path: ./ruleset/DustinWin/microsoft-cn.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/microsoft-cn.list"
     interval: 86400
 
@@ -118,7 +118,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
-    path: ./rules/apple-cn.list
+    path: ./ruleset/DustinWin/apple-cn.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/apple-cn.list"
     interval: 86400
 
@@ -126,7 +126,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
-    path: ./rules/google-cn.list
+    path: ./ruleset/DustinWin/google-cn.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/google-cn.list"
     interval: 86400
 
@@ -134,7 +134,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
-    path: ./rules/games-cn.list
+    path: ./ruleset/DustinWin/games-cn.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/games-cn.list"
     interval: 86400
 
@@ -142,7 +142,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
-    path: ./rules/ai.list
+    path: ./ruleset/DustinWin/ai.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ai.list"
     interval: 86400
 
@@ -150,7 +150,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    path: ./rules/networktest.list
+    path: ./ruleset/DustinWin/networktest.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/networktest.list"
     interval: 86400
 
@@ -158,7 +158,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
-    path: ./rules/proxy.list
+    path: ./ruleset/DustinWin/proxy.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/proxy.list"
     interval: 86400
 
@@ -166,7 +166,7 @@ rule-providers:
     type: http
     behavior: domain
     format: text
-    path: ./rules/cn.list
+    path: ./ruleset/DustinWin/cn.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/cn.list"
     interval: 86400
 
@@ -174,7 +174,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: text
-    path: ./rules/telegramip.list
+    path: ./ruleset/DustinWin/telegramip.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/telegramip.list"
     interval: 86400
 
@@ -182,7 +182,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: text
-    path: ./rules/privateip.list
+    path: ./ruleset/DustinWin/privateip.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/privateip.list"
     interval: 86400
 
@@ -190,7 +190,7 @@ rule-providers:
     type: http
     behavior: ipcidr
     format: text
-    path: ./rules/cnip.list
+    path: ./ruleset/DustinWin/cnip.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/cnip.list"
     interval: 86400
 

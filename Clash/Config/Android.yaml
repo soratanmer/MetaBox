@@ -9,30 +9,31 @@ port: 7899
 allow-lan: true
 log-level: info
 ipv6: true
-secret: '0513'
+secret: "0513"
 external-controller: 127.0.0.1:51225
+
 
 dns:
   enable: true
   listen: 0.0.0.0:1053
   ipv6: true
   use-system-hosts: false
-  cache-algorithm: arc
   enhanced-mode: fake-ip
   fake-ip-range: 11.0.0.1/16
   fake-ip-filter:
-  - +.lan
-  - +.local
-  - +.msftconnecttest.com
-  - +.msftncsi.com
-  - localhost.ptlogin2.qq.com
-  - localhost.sec.qq.com
-  - localhost.work.weixin.qq.com
+    - +.lan
+    - +.local
+    - +.msftconnecttest.com
+    - +.msftncsi.com
+    - localhost.ptlogin2.qq.com
+    - localhost.sec.qq.com
+    - localhost.work.weixin.qq.com
   default-nameserver:
-  - 8.8.8.8
-  - 1.1.1.1
-  - 223.5.5.5
-  - 119.29.29.29
+    - 8.8.8.8
+    - 1.1.1.1
+    - 223.5.5.5
+    - 119.29.29.29
+    - 114.114.114.114
   nameserver:
   - https://8.8.8.8/dns-query
   - https://8.8.4.4/dns-query
@@ -45,9 +46,9 @@ dns:
   - https://1.0.0.1/dns-query
   nameserver-policy:
     geosite:private,cn,geolocation-cn:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
-    - https://doh.360.cn/dns-query
+      - https://dns.alidns.com/dns-query
+      - https://doh.pub/dns-query
+      - https://doh.360.cn/dns-query
     geosite:google,youtube,telegram,gfw,geolocation-!cn:
     - https://8.8.8.8/dns-query
     - https://8.8.4.4/dns-query
@@ -60,12 +61,11 @@ tun:
   auto-route: true
   auto-detect-interface: true
   dns-hijack:
-  - any:53
+    - any:53
   strict-route: false
   mtu: 9000
   enable: true
 
-# 代理集合（获取机场订阅链接内的所有节点）
 proxy-providers:
   🛫 我的机场:
     <<: *p
@@ -73,10 +73,23 @@ proxy-providers:
     path: ./proxies/airport.yaml
 
 
-# 策略组
 proxy-groups:
-  - {name: 🚀 节点选择, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 手动切换, DIRECT]}
-  - {name: 🚀 手动切换, type: select, include-all: true}
+  - {
+      name: 🚀 节点选择,
+      type: select,
+      proxies:
+        [
+          🇭🇰 香港节点,
+          🇹🇼 台湾节点,
+          🇯🇵 日本节点,
+          🇸🇬 新加坡节点,
+          🇺🇸 美国节点,
+          🌍 其它地区,
+          🚀 手动切换,
+          DIRECT,
+        ],
+    }
+  - { name: 🚀 手动切换, type: select, include-all: true }
 
   - {name: 📲 电报消息, <<: *pr}
   - {name: 💬 OpenAi, <<: *pr}
@@ -108,118 +121,145 @@ rule-anchor:
 rule-providers:
   BanAD:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/BanAD.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
   BanProgramAD:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/BanProgramAD.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
   BanEasyList:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/BanEasyList.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list"
   BanEasyListChina:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/BanEasyListChina.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list"
   BanEasyPrivacy:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/BanEasyPrivacy.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyPrivacy.list"
   LocalAreaNetwork:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/LocalAreaNetwork.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list"
   UnBan:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/UnBan.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list"
   GoogleCN:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/GoogleCN.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list"
   SteamCN:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/SteamCN.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list"
   GoogleFCM:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/GoogleFCM.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list"
   OneDrive:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/OneDrive.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list"
   Microsoft:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/Microsoft.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list"
   Apple:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/Apple.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list"
   Telegram:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/Telegram.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list"
   OpenAi:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/OpenAi.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list"
   Spotify:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/Spotify.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Spotify.list"
   NetEaseMusic:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/NetEaseMusic.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list"
   YouTube:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/YouTube.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list"
   Netflix:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/Netflix.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list"
   Bahamut:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/Bahamut.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list"
   BilibiliHMT:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/BilibiliHMT.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
   Bilibili:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/Bilibili.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list"
   ChinaMedia:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/ChinaMedia.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
   ProxyMedia:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/ProxyMedia.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
   ProxyGFWlist:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/ProxyGFWlist.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
   ChinaDomain:
+    <<: *classical
     <<: *classical
     path: ./ruleset/ACL4SSR/ChinaDomain.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list"
   ChinaCompanyIp:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/ChinaCompanyIp.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list"
   Download:
     <<: *classical
+    <<: *classical
     path: ./ruleset/ACL4SSR/Download.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list"
 
-# 规则
 rules:
   - RULE-SET,BanAD,🛑 广告拦截
   - RULE-SET,BanProgramAD,🛑 广告拦截

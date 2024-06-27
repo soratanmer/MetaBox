@@ -1,3 +1,7 @@
+pr: &pr {type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
+
+p: &p {type: http, interval: 3600, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}}
+
 mode: rule
 mixed-port: 51300
 socks-port: 7898
@@ -7,6 +11,7 @@ log-level: info
 ipv6: true
 secret: '0513'
 external-controller: 127.0.0.1:51225
+
 dns:
   enable: true
   listen: 0.0.0.0:1053
@@ -14,7 +19,7 @@ dns:
   use-system-hosts: false
   cache-algorithm: arc
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
+  fake-ip-range: 11.0.0.1/16
   fake-ip-filter:
   - +.lan
   - +.local
@@ -29,29 +34,15 @@ dns:
   - 223.5.5.5
   - 119.29.29.29
   nameserver:
-  - https://dns.alidns.com/dns-query
-  - https://doh.pub/dns-query
-  - https://doh.360.cn/dns-query
   - https://8.8.8.8/dns-query
   - https://8.8.4.4/dns-query
   - https://1.1.1.1/dns-query
   - https://1.0.0.1/dns-query
-  - https://208.67.222.222/dns-query
-  - https://208.67.220.220/dns-query
-  - https://194.242.2.2/dns-query
-  - https://194.242.2.3/dns-query
   proxy-server-nameserver:
-  - https://dns.alidns.com/dns-query
-  - https://doh.pub/dns-query
-  - https://doh.360.cn/dns-query
   - https://8.8.8.8/dns-query
   - https://8.8.4.4/dns-query
   - https://1.1.1.1/dns-query
   - https://1.0.0.1/dns-query
-  - https://208.67.222.222/dns-query
-  - https://208.67.220.220/dns-query
-  - https://194.242.2.2/dns-query
-  - https://194.242.2.3/dns-query
   nameserver-policy:
     geosite:private,cn,geolocation-cn:
     - https://dns.alidns.com/dns-query
@@ -62,11 +53,7 @@ dns:
     - https://8.8.4.4/dns-query
     - https://1.1.1.1/dns-query
     - https://1.0.0.1/dns-query
-    - https://208.67.222.222/dns-query
-    - https://208.67.220.220/dns-query
-    - https://194.242.2.2/dns-query
-    - https://194.242.2.3/dns-query
-  fallback: []
+
 tun:
   stack: gvisor
   device: Meta
@@ -80,260 +67,157 @@ tun:
 
 # 代理集合（获取机场订阅链接内的所有节点）
 proxy-providers:
-  🛫 我的机场 1:
-    type: http
-    # 机场订阅链接，使用 Clash 链接
+  🛫 我的机场:
+    <<: *p
     url: "https://example.com/xxx/xxx&flag=clash"
-    path: ./proxies/airport1.yaml
-    interval: 86400
-    # 初步筛选需要的节点，可有效减轻路由器压力，支持正则表达式，不筛选可删除此配置项
-    filter: "(?i)港|hk|hongkong|hong kong|台|tw|taiwan|日本|jp|japan|新|sg|singapore|美|us|unitedstates|united states"
-    # 初步排除不需要的节点，支持正则表达式，若不排除可删除此配置项
-    exclude-filter: "高倍|×10"
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 600
+    path: ./proxies/airport.yaml
 
-  🛫 我的机场 2:
-    type: http
-    url: "https://example.com/xxx/xxx&flag=clash"
-    path: ./proxies/airport2.yaml
-    interval: 86400
-    filter: "(?i)港|hk|hongkong|hong kong|台|tw|taiwan|日本|jp|japan|新|sg|singapore|美|us|unitedstates|united states"
-    exclude-filter: "高倍|×10"
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 600
 
 # 策略组
 proxy-groups:
   - {name: 🚀 节点选择, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 手动切换, DIRECT]}
   - {name: 🚀 手动切换, type: select, include-all: true}
 
-  - {name: 📲 电报消息, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 💬 OpenAi, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 🎶 网易音乐, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 🎶 Spotify, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 📹 油管视频, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 🎥 奈飞视频, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 📺 巴哈姆特, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 📺 哔哩哔哩, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 🌍 国外媒体, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 🌏 国内媒体, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: Ⓜ️ 微软服务, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 🍎 苹果服务, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
-  - {name: 📢 谷歌FCM, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
+  - {name: 📲 电报消息, <<: *pr}
+  - {name: 💬 OpenAi, <<: *pr}
+  - {name: 🎶 网易音乐, <<: *pr}
+  - {name: 🎶 Spotify, <<: *pr}
+  - {name: 📹 油管视频, <<: *pr}
+  - {name: 🎥 奈飞视频, <<: *pr}
+  - {name: 📺 巴哈姆特, <<: *pr}
+  - {name: 📺 哔哩哔哩, <<: *pr}
+  - {name: 🌍 国外媒体, <<: *pr}
+  - {name: 🌏 国内媒体, <<: *pr}
+  - {name: Ⓜ️ 微软服务, <<: *pr}
+  - {name: 🍎 苹果服务, <<: *pr}
+  - {name: 📢 谷歌FCM, <<: *pr}
 
   - {name: 🛑 广告拦截, type: select, proxies: [REJECT, DIRECT]}
   - {name: 🎯 全球直连, type: select, proxies: [DIRECT, 🚀 节点选择]}
-  - {name: 🐟 漏网之鱼, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🚀 节点选择, 🚀 手动切换, DIRECT]}
+  - {name: 🐟 漏网之鱼, <<: *pr}
 
-  - {name: 🇭🇰 香港节点, type: url-test, tolerance: 50, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)港|hk|hongkong|hong kong"}
-  - {name: 🇹🇼 台湾节点, type: url-test, tolerance: 50, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)台|tw|taiwan"}
-  - {name: 🇯🇵 日本节点, type: url-test, tolerance: 50, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)日本|jp|japan"}
-  - {name: 🇸🇬 新加坡节点, type: url-test, tolerance: 50, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)新|sg|singapore"}
-  - {name: 🇺🇸 美国节点, type: url-test, tolerance: 50, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)美|us|unitedstates|united states"}
+  - {name: 🇭🇰 香港节点, type: url-test, tolerance: 50, include-all-providers: true, filter: "(?i)港|hk|hongkong|hong kong"}
+  - {name: 🇹🇼 台湾节点, type: url-test, tolerance: 50, include-all-providers: true, filter: "(?i)台|tw|taiwan"}
+  - {name: 🇯🇵 日本节点, type: url-test, tolerance: 50, include-all-providers: true, filter: "(?i)日本|jp|japan"}
+  - {name: 🇸🇬 新加坡节点, type: url-test, tolerance: 50, include-all-providers: true, filter: "(?i)新|sg|singapore"}
+  - {name: 🇺🇸 美国节点, type: url-test, tolerance: 50, include-all-providers: true, filter: "(?i)美|us|unitedstates|united states"}
 
-# 规则集
+rule-anchor:
+  classical: &classical {type: http, interval: 86400, behavior: classical, format: text}
+
 rule-providers:
   BanAD:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/BanAD.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
-    interval: 86400
   BanProgramAD:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/BanProgramAD.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
-    interval: 86400
   BanEasyList:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/BanEasyList.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list"
-    interval: 86400
   BanEasyListChina:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/BanEasyListChina.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list"
-    interval: 86400
   BanEasyPrivacy:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/BanEasyPrivacy.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyPrivacy.list"
-    interval: 86400
   LocalAreaNetwork:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/LocalAreaNetwork.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list"
-    interval: 86400
   UnBan:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/UnBan.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list"
-    interval: 86400
   GoogleCN:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/GoogleCN.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list"
-    interval: 86400
   SteamCN:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/SteamCN.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list"
-    interval: 86400
   GoogleFCM:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/GoogleFCM.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list"
-    interval: 86400
   OneDrive:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/OneDrive.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list"
-    interval: 86400
   Microsoft:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/Microsoft.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list"
-    interval: 86400
   Apple:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/Apple.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list"
-    interval: 86400
   Telegram:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/Telegram.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list"
-    interval: 86400
   OpenAi:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/OpenAi.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list"
-    interval: 86400
   Spotify:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/Spotify.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Spotify.list"
-    interval: 86400
   NetEaseMusic:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/NetEaseMusic.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list"
-    interval: 86400
   YouTube:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/YouTube.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list"
-    interval: 86400
   Netflix:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/Netflix.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list"
-    interval: 86400
   Bahamut:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/Bahamut.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list"
-    interval: 86400
   BilibiliHMT:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/BilibiliHMT.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
-    interval: 86400
   Bilibili:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/Bilibili.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list"
-    interval: 86400
   ChinaMedia:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/ChinaMedia.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
-    interval: 86400
   ProxyMedia:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/ProxyMedia.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
-    interval: 86400
   ProxyGFWlist:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/ProxyGFWlist.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
-    interval: 86400
   ChinaDomain:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/ChinaDomain.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list"
-    interval: 86400
   ChinaCompanyIp:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/ChinaCompanyIp.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list"
-    interval: 86400
   Download:
-    type: http
-    behavior: classical
-    format: text
+    <<: *classical
     path: ./ruleset/ACL4SSR/Download.list
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list"
-    interval: 86400
 
 # 规则
 rules:

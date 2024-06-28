@@ -11,10 +11,6 @@ const foreignNameservers = [
   "https://8.8.4.4/dns-query", // Google(备)
   "https://1.1.1.1/dns-query", // Cloudflare(主)
   "https://1.0.0.1/dns-query", // Cloudflare(备)
-  "https://208.67.222.222/dns-query", // OpenDNS(主)
-  "https://208.67.220.220/dns-query", // OpenDNS(备)
-  "https://194.242.2.2/dns-query", // Mullvad(主)
-  "https://194.242.2.3/dns-query" // Mullvad(备)
 ];
 
 // DNS配置
@@ -23,9 +19,8 @@ const dnsConfig = {
   "listen": "0.0.0.0:1053",
   "ipv6": true,
   "use-system-hosts": false,
-  "cache-algorithm": "arc",
   "enhanced-mode": "fake-ip",
-  "fake-ip-range": "198.18.0.1/16",
+  "fake-ip-range": "11.0.0.1/16",
   "fake-ip-filter": [
     // 本地主机/设备
     "+.lan",
@@ -40,8 +35,8 @@ const dnsConfig = {
     "localhost.work.weixin.qq.com"
   ],
   "default-nameserver": ["8.8.8.8", "1.1.1.1", "223.5.5.5", "119.29.29.29"],
-  "nameserver": [...domesticNameservers, ...foreignNameservers],
-  "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
+  "nameserver": [...foreignNameservers],
+  "proxy-server-nameserver": [...foreignNameservers],
   "nameserver-policy": {
     "geosite:private,cn,geolocation-cn": domesticNameservers,
     "geosite:google,youtube,telegram,gfw,geolocation-!cn": foreignNameservers

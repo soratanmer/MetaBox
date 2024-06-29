@@ -1,0 +1,85 @@
+{
+    "outbounds": [
+      { "tag": "🔰 节点选择", "type": "selector", "outbounds": [ "🇭🇰 香港节点", "🆓 免费节点", "🇹🇼 台湾节点", "🇯🇵 日本节点", "🇰🇷 韩国节点", "🇸🇬 新加坡节点", "🇺🇸 美国节点" ] },
+      { "tag": "🐟 漏网之鱼", "type": "selector", "outbounds": [ "🔰 节点选择", "🎯 全球直连" ] },
+      { "tag": "📈 网络测试", "type": "selector", "outbounds": [ "🎯 全球直连", "🇭🇰 香港节点", "🆓 免费节点", "🇹🇼 台湾节点", "🇯🇵 日本节点", "🇰🇷 韩国节点", "🇸🇬 新加坡节点", "🇺🇸 美国节点" ] },
+      { "tag": "🤖 人工智能", "type": "selector", "outbounds": [ "🔰 节点选择", "🇭🇰 香港节点", "🇹🇼 台湾节点", "🇯🇵 日本节点", "🇰🇷 韩国节点", "🇸🇬 新加坡节点", "🇺🇸 美国节点" ] },
+      { "tag": "🎮 游戏服务", "type": "selector", "outbounds": [ "🎯 全球直连", "🔰 节点选择" ] },
+      { "tag": "🪟 微软服务", "type": "selector", "outbounds": [ "🎯 全球直连", "🔰 节点选择" ] },
+      { "tag": "🇬 谷歌服务", "type": "selector", "outbounds": [ "🎯 全球直连", "🔰 节点选择" ] },
+      { "tag": "🍎 苹果服务", "type": "selector", "outbounds": [ "🎯 全球直连", "🔰 节点选择" ] },
+      { "tag": "🇨🇳 直连域名", "type": "selector", "outbounds": [ "🎯 全球直连", "🔰 节点选择" ] },
+      { "tag": "🇨🇳 直连 IP", "type": "selector", "outbounds": [ "🎯 全球直连", "🔰 节点选择" ] },
+      { "tag": "🪜 代理域名", "type": "selector", "outbounds": [ "🔰 节点选择", "🎯 全球直连" ] },
+      { "tag": "📲 电报消息", "type": "selector", "outbounds": [ "🔰 节点选择" ] },
+      { "tag": "🔒 私有网络", "type": "selector", "outbounds": [ "🎯 全球直连" ] },
+      { "tag": "🛑 广告拦截", "type": "selector", "outbounds": [ "REJECT" ] },
+      { "tag": "🎯 全球直连", "type": "selector", "outbounds": [ "DIRECT" ] },
+      { "tag": "REJECT", "type": "block" },
+      { "tag": "DIRECT", "type": "direct" },
+      { "tag": "GLOBAL", "type": "selector", "outbounds": [ "DIRECT", "REJECT", "🇭🇰 香港节点", "🆓 免费节点", "🇹🇼 台湾节点", "🇯🇵 日本节点", "🇰🇷 韩国节点", "🇸🇬 新加坡节点", "🇺🇸 美国节点" ] },
+      { "tag": "dns-out", "type": "dns" },
+      // 若没有单个出站节点，须删除所有 `🆓 免费节点` 相关内容
+      {
+        "tag": "🆓 免费节点",
+        "type": "vless",
+        "server": "example.com",
+        "server_port": 443,
+        "uuid": "{uuid}",
+        "network": "tcp",
+        "tls": { "enabled": true, "server_name": "example.com", "insecure": false },
+        "transport": { "type": "ws", "path": "/?ed=2048", "headers": { "Host": "example.com" } }
+      },
+      { "tag": "🇭🇰 香港节点", "type": "urltest", "tolerance": 50, "use_all_providers": true, "includes": [ "🇭🇰" ] },
+      { "tag": "🇹🇼 台湾节点", "type": "urltest", "tolerance": 50, "use_all_providers": true, "includes": [ "🇹🇼" ] },
+      { "tag": "🇯🇵 日本节点", "type": "urltest", "tolerance": 50, "use_all_providers": true, "includes": [ "🇯🇵" ] },
+      { "tag": "🇰🇷 韩国节点", "type": "urltest", "tolerance": 50, "use_all_providers": true, "includes": [ "🇰🇷" ] },
+      { "tag": "🇸🇬 新加坡节点", "type": "urltest", "tolerance": 50, "use_all_providers": true, "includes": [ "🇸🇬" ] },
+      { "tag": "🇺🇸 美国节点", "type": "urltest", "tolerance": 50, "use_all_providers": true, "includes": [ "🇺🇸" ] }
+    ],
+    "outbound_providers": [
+      {
+        "tag": "🛫 我的机场",
+        "type": "remote",
+        // 修改为你的 Clash 订阅链接
+        "download_url": "https://example.com/xxx/xxx&flag=clash",
+        "path": "./providers/airport.yaml",
+        "download_interval": "24h",
+        "download_ua": "clash.meta",
+        "includes": [ "🇭🇰|🇹🇼|🇯🇵|🇰🇷|🇸🇬|🇺🇸" ],
+        "healthcheck_url": "https://www.gstatic.com/generate_204",
+        "healthcheck_interval": "10m"
+      }
+    ],
+    "route": {
+      "rules": [
+        { "protocol": [ "dns" ], "outbound": "dns-out" },
+        { "clash_mode": "Direct", "outbound": "DIRECT" },
+        { "clash_mode": "Global", "outbound": "GLOBAL" },
+        { "geosite": [ "ads" ], "outbound": "🛑 广告拦截" },
+        { "geosite": [ "private" ], "outbound": "🔒 私有网络" },
+        { "geosite": [ "microsoft-cn" ], "outbound": "🪟 微软服务" },
+        { "geosite": [ "apple-cn" ], "outbound": "🍎 苹果服务" },
+        { "geosite": [ "google-cn" ], "outbound": "🇬 谷歌服务" },
+        { "geosite": [ "games-cn" ], "outbound": "🎮 游戏服务" },
+        { "geosite": [ "ai" ], "outbound": "🤖 人工智能" },
+        { "geosite": [ "networktest" ], "outbound": "📈 网络测试" },
+        { "geosite": [ "proxy" ], "outbound": "🪜 代理域名" },
+        { "geosite": [ "cn" ], "outbound": "🇨🇳 直连域名" },
+        { "geoip": [ "telegram" ], "outbound": "📲 电报消息", "skip_resolve": true },
+        { "geoip": [ "private" ], "outbound": "🔒 私有网络", "skip_resolve": true },
+        { "geoip": [ "cn" ], "outbound": "🇨🇳 直连 IP" }
+      ],
+      "geosite": {
+        "path": "./geosite.db",
+        "download_url": "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geosite.db"
+      },
+      "geoip": {
+        "path": "./geoip.db",
+        "download_url": "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box/geoip-lite.db"
+      },
+      "final": "🐟 漏网之鱼",
+      "auto_detect_interface": true,
+      "concurrent_dial": true
+    }
+  }

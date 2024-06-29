@@ -1,6 +1,7 @@
 {
     "log": {
-        "level": "error",
+        "disabled": false,
+        "level": "info",
         "timestamp": true
     },
     "dns": {
@@ -31,81 +32,59 @@
         ],
         "rules": [
             {
-                "outbound": "any",
+                "outbound": [
+                    "any"
+                ],
                 "server": "dns_direct"
             },
             {
-                "clash_mode": "Direct",
-                "server": "dns_direct"
-            },
-            {
-                "clash_mode": "Global",
-                "server": "dns_proxy"
-            },
-            {
-                "rule_set": [
-                    "ads"
+                "geosite": [
+                    "category-ads-all"
                 ],
                 "server": "dns_block",
-                "disable_cache": true,
-                "rewrite_ttl": 0
+                "disable_cache": true
             },
             {
-                "rule_set": [
-                    "fakeip-filter",
-                    "private"
+                "geosite": [
+                    "geolocation-!cn"
                 ],
                 "query_type": [
                     "A",
                     "AAAA"
                 ],
-                "server": "dns_direct"
+                "server": "dns_fakeip"
             },
             {
-                "rule_set": [
-                    "cn",
-                    "proxy"
-                ],
-                "query_type": [
-                    "A",
-                    "AAAA"
-                ],
-                "server": "dns_fakeip",
-                "rewrite_ttl": 0
-            },
-            {
-                "fallback_rules": [
-                    {
-                        "rule_set": [
-                            "cnip"
-                        ],
-                        "server": "dns_direct"
-                    },
-                    {
-                        "match_all": true
-                    }
+                "geosite": [
+                    "geolocation-!cn"
                 ],
                 "server": "dns_proxy"
             }
         ],
-        "final": "dns_proxy",
-        "strategy": "prefer_ipv6",
+        "final": "dns_direct",
         "independent_cache": true,
-        "reverse_mapping": true,
-        "mapping_override": true,
         "fakeip": {
             "enabled": true,
             "inet4_range": "198.18.0.0/15",
             "inet6_range": "fc00::/18"
         }
     },
+    "ntp": {
+        "enabled": true,
+        "server": "time.apple.com",
+        "server_port": 123,
+        "interval": "30m",
+        "detour": "DIRECT"
+    },
     "inbounds": [
         {
             "tag": "tun-in",
             "type": "tun",
             "interface_name": "sing-box",
-            "inet4_address": "172.19.0.1/30",
-            "inet6_address": "fdfe:dcba:9876::1/126",
+            "address": [
+                "172.19.0.1/30",
+                "fdfe:dcba:9876::1/126"
+            ],
             "auto_route": true,
             "strict_route": true,
             "stack": "mixed",
@@ -114,7 +93,7 @@
     ],
     "outbounds": [
         {
-            "tag": "🚀 节点选择",
+            "tag": "🔰 节点选择",
             "type": "selector",
             "outbounds": [
                 "🇭🇰 香港节点",
@@ -123,131 +102,6 @@
                 "🇰🇷 韩国节点",
                 "🇸🇬 新加坡节点",
                 "🇺🇸 美国节点"
-            ]
-        },
-        {
-            "tag": "🐟 漏网之鱼",
-            "type": "selector",
-            "outbounds": [
-                "🚀 节点选择",
-                "🎯 全球直连"
-            ]
-        },
-        {
-            "tag": "📈 网络测试",
-            "type": "selector",
-            "outbounds": [
-                "🎯 全球直连",
-                "🇭🇰 香港节点",
-                "🇹🇼 台湾节点",
-                "🇯🇵 日本节点",
-                "🇰🇷 韩国节点",
-                "🇸🇬 新加坡节点",
-                "🇺🇸 美国节点"
-            ]
-        },
-        {
-            "tag": "🤖 人工智能",
-            "type": "selector",
-            "outbounds": [
-                "🚀 节点选择",
-                "🇭🇰 香港节点",
-                "🇹🇼 台湾节点",
-                "🇯🇵 日本节点",
-                "🇰🇷 韩国节点",
-                "🇸🇬 新加坡节点",
-                "🇺🇸 美国节点"
-            ]
-        },
-        {
-            "tag": "🎮 游戏服务",
-            "type": "selector",
-            "outbounds": [
-                "🎯 全球直连",
-                "🚀 节点选择"
-            ]
-        },
-        {
-            "tag": "🪟 微软服务",
-            "type": "selector",
-            "outbounds": [
-                "🎯 全球直连",
-                "🚀 节点选择"
-            ]
-        },
-        {
-            "tag": "🇬 谷歌服务",
-            "type": "selector",
-            "outbounds": [
-                "🎯 全球直连",
-                "🚀 节点选择"
-            ]
-        },
-        {
-            "tag": "🍎 苹果服务",
-            "type": "selector",
-            "outbounds": [
-                "🎯 全球直连",
-                "🚀 节点选择"
-            ]
-        },
-        {
-            "tag": "🇨🇳 直连域名",
-            "type": "selector",
-            "outbounds": [
-                "🎯 全球直连",
-                "🚀 节点选择"
-            ]
-        },
-        {
-            "tag": "🇨🇳 直连 IP",
-            "type": "selector",
-            "outbounds": [
-                "🎯 全球直连",
-                "🚀 节点选择"
-            ]
-        },
-        {
-            "tag": "🪜 代理域名",
-            "type": "selector",
-            "outbounds": [
-                "🚀 节点选择",
-                "🎯 全球直连"
-            ]
-        },
-        {
-            "tag": "📲 电报消息",
-            "type": "selector",
-            "outbounds": [
-                "🚀 节点选择"
-            ]
-        },
-        {
-            "tag": "🖥️ 直连软件",
-            "type": "selector",
-            "outbounds": [
-                "🎯 全球直连"
-            ]
-        },
-        {
-            "tag": "🔒 私有网络",
-            "type": "selector",
-            "outbounds": [
-                "🎯 全球直连"
-            ]
-        },
-        {
-            "tag": "🛑 广告拦截",
-            "type": "selector",
-            "outbounds": [
-                "REJECT"
-            ]
-        },
-        {
-            "tag": "🎯 全球直连",
-            "type": "selector",
-            "outbounds": [
-                "DIRECT"
             ]
         },
         {
@@ -259,6 +113,10 @@
             "type": "direct"
         },
         {
+            "tag": "dns-out",
+            "type": "dns"
+        },
+        {
             "tag": "GLOBAL",
             "type": "selector",
             "outbounds": [
@@ -267,14 +125,9 @@
                 "🇭🇰 香港节点",
                 "🇹🇼 台湾节点",
                 "🇯🇵 日本节点",
-                "🇰🇷 韩国节点",
                 "🇸🇬 新加坡节点",
                 "🇺🇸 美国节点"
             ]
-        },
-        {
-            "tag": "dns-out",
-            "type": "dns"
         },
         {
             "tag": "🇭🇰 香港节点",
@@ -304,15 +157,6 @@
             ]
         },
         {
-            "tag": "🇰🇷 韩国节点",
-            "type": "urltest",
-            "tolerance": 50,
-            "use_all_providers": true,
-            "includes": [
-                "🇰🇷"
-            ]
-        },
-        {
             "tag": "🇸🇬 新加坡节点",
             "type": "urltest",
             "tolerance": 50,
@@ -339,9 +183,6 @@
             "path": "./airport.yaml",
             "download_interval": "24h",
             "download_ua": "clash.meta",
-            "includes": [
-                "🇭🇰|🇹🇼|🇯🇵|🇰🇷|🇸🇬|🇺🇸"
-            ],
             "healthcheck_url": "https://www.gstatic.com/generate_204",
             "healthcheck_interval": "10m"
         }

@@ -4,6 +4,8 @@ DOMAIN-KEYWORD,xlliveud
 DOMAIN-KEYWORD,xunlei
 DOMAIN-KEYWORD,yunpan
 DOMAIN-SUFFIX,qbittorrent.org
+PROCESS-NAME,aDrive
+PROCESS-NAME,aDrive.exe
 PROCESS-NAME,aria2
 PROCESS-NAME,aria2.exe
 PROCESS-NAME,aria2c
@@ -40,6 +42,8 @@ PROCESS-NAME,proxifier.exe
 PROCESS-NAME,qbittorrent
 PROCESS-NAME,qbittorrent-nox
 PROCESS-NAME,qbittorrent.exe
+PROCESS-NAME,QuarkCloudDrive
+PROCESS-NAME,QuarkCloudDrive.exe
 PROCESS-NAME,shadowsocks
 PROCESS-NAME,shadowsocks.exe
 PROCESS-NAME,shadowsocksr

@@ -388,10 +388,10 @@
                 "download_detour": "全球直连"
             },
             {
-                "tag": "CATEGORY-ADS",
+                "tag": "ads",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs",
+                "url": "https://testingcf.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/ads.srs",
                 "download_detour": "全球直连"
             },
             {
@@ -457,7 +457,7 @@
                 "outbound": "FCM"
             },
             {
-                "rule_set": "CATEGORY-ADS",
+                "rule_set": "ads",
                 "outbound": "广告拦截"
             },
             {

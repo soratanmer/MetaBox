@@ -5,7 +5,7 @@ let config = JSON.parse($files[0])
 let proxyProviders = {}
 
 $substore.cache.subs.map(sub => {
-    if (sub.name == name) {
+    if (sub.name === name) {
         proxyProviders = {
             [sub.name]: {
                 type: "http",
@@ -22,4 +22,4 @@ $substore.cache.subs.map(sub => {
     }
 })
 
-$content = JSON.stringify(config, null, 4)
+$content = JSON.stringify(name, null, 4)

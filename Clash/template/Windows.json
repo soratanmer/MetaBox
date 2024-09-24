@@ -86,19 +86,7 @@
             "tcp://any:53"
         ]
     },
-    "proxy-providers": {
-        "provider": {
-            "type": "http",
-            "interval": 86400,
-            "url": "",
-            "path": "",
-            "health-check": {
-                "enable": true,
-                "url": "https://www.gstatic.com/generate_204",
-                "interval": 300
-            }
-        }
-    },
+    "proxy-providers": {},
     "proxy-groups": [
         {
             "name": "节点选择",

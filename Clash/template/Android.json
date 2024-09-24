@@ -1,446 +1,447 @@
 {
-	"mode": "rule",
-	"mixed-port": 51300,
-	"allow-lan": true,
-	"log-level": "info",
-	"ipv6": true,
-	"secret": "accpetWYN",
-	"external-controller": "127.0.0.1:51225",
-	"find-process-mode": "strict",
-	"global-client-fingerprint": "chrome",
-	"profile": {
-		"store-selected": true,
-		"store-fake-ip": true
-	},
-	"sniffer": {
-		"enable": true,
-		"parse-pure-ip": true,
-		"sniff": {
-			"HTTP": {
-				"ports": [
-					80,
-					"8080-8880"
-				]
-			},
-			"TLS": {
-				"ports": [
-					443,
-					8443
-				]
-			},
-			"QUIC": {
-				"ports": [
-					443,
-					8443
-				]
-			}
-		},
-		"skip-domain": [
-			"Mijia Cloud"
-		]
-	},
-	"dns": {
-		"enable": true,
-		"ipv6": true,
-		"prefer-h3": true,
-		"respect-rules": true,
-		"enhanced-mode": "fake-ip",
-		"fake-ip-range": "11.0.0.1/16",
-		"fake-ip-filter": [
-			"*",
-			"+.lan",
-			"+.local",
-			"+.market.xiaomi.com"
-		],
-		"nameserver": [
-			"https://223.5.5.5/dns-query",
-			"https://120.53.53.53/dns-query"
-		],
-		"proxy-server-nameserver": [
-			"https://223.5.5.5/dns-query",
-			"https://120.53.53.53/dns-query"
-		],
-		"nameserver-policy": {
-			"rule-set:domain-cn": [
-				"https://223.5.5.5/dns-query",
-				"https://120.53.53.53/dns-query"
-			],
-			"rule-set:domain-geolocation-!cn": [
-				"https://8.8.8.8/dns-query",
-				"https://1.1.1.1/dns-query"
-			],
-			"rule-set:domain-ads": [
-				"rcode://success"
-			]
-		}
-	},
-	"tun": {
-		"enable": true,
-		"auto-route": true,
-		"auto-detect-interface": true,
-		"strict-route": true,
-		"stack": "system",
-		"device": "Meta",
-		"dns-hijack": [
-			"any:53",
-			"tcp://any:53"
-		]
-	},
-	"proxy-providers": {
-		"provider": {
-			"type": "http",
-			"interval": 86400,
-			"url": "",
-			"health-check": {
-				"enable": true,
-				"url": "https://www.gstatic.com/generate_204",
-				"interval": 300
-			}
-		}
-	},
-	"proxy-groups": [
-		{
-			"name": "节点选择",
-			"type": "select",
-			"proxies": [
-				"日本节点",
-				"香港节点",
-				"台湾节点",
-				"新加坡节点",
-				"美国节点",
-				"手动切换",
-				"DIRECT"
-			]
-		},
-		{
-			"name": "手动切换",
-			"type": "select",
-			"include-all": true
-		},
-		{
-			"name": "Sina",
-			"type": "select",
-			"proxies": [
-				"日本节点",
-				"香港节点",
-				"台湾节点",
-				"新加坡节点",
-				"美国节点",
-				"节点选择",
-				"手动切换",
-				"DIRECT"
-			]
-		},
-		{
-			"name": "Spotify",
-			"type": "select",
-			"proxies": [
-				"DIRECT",
-				"日本节点",
-				"香港节点",
-				"台湾节点",
-				"新加坡节点",
-				"美国节点",
-				"节点选择",
-				"手动切换"
-			]
-		},
-		{
-			"name": "YouTube",
-			"type": "select",
-			"proxies": [
-				"日本节点",
-				"香港节点",
-				"台湾节点",
-				"新加坡节点",
-				"美国节点",
-				"节点选择",
-				"手动切换",
-				"DIRECT"
-			]
-		},
-		{
-			"name": "哔哩哔哩",
-			"type": "select",
-			"proxies": [
-				"DIRECT",
-				"台湾节点",
-				"香港节点",
-				"新加坡节点",
-				"日本节点",
-				"美国节点",
-				"节点选择",
-				"手动切换"
-			]
-		},
-		{
-			"name": "Telegram",
-			"type": "select",
-			"proxies": [
-				"日本节点",
-				"香港节点",
-				"台湾节点",
-				"新加坡节点",
-				"美国节点",
-				"节点选择",
-				"手动切换",
-				"DIRECT"
-			]
-		},
-		{
-			"name": "OpenAi",
-			"type": "select",
-			"proxies": [
-				"美国节点",
-				"日本节点",
-				"香港节点",
-				"台湾节点",
-				"新加坡节点",
-				"节点选择",
-				"手动切换",
-				"DIRECT"
-			]
-		},
-		{
-			"name": "FCM",
-			"type": "select",
-			"proxies": [
-				"DIRECT",
-				"日本节点",
-				"香港节点",
-				"台湾节点",
-				"新加坡节点",
-				"美国节点",
-				"节点选择",
-				"手动切换"
-			]
-		},
-		{
-			"name": "广告拦截",
-			"type": "select",
-			"proxies": [
-				"REJECT",
-				"DIRECT"
-			]
-		},
-		{
-			"name": "全球直连",
-			"type": "select",
-			"proxies": [
-				"DIRECT",
-				"节点选择"
-			]
-		},
-		{
-			"name": "漏网之鱼",
-			"type": "select",
-			"proxies": [
-				"日本节点",
-				"香港节点",
-				"台湾节点",
-				"新加坡节点",
-				"美国节点",
-				"节点选择",
-				"手动切换",
-				"DIRECT"
-			]
-		},
-		{
-			"name": "日本节点",
-			"type": "url-test",
-			"include-all-providers": true,
-			"filter": "(?i)日本|jp|japan"
-		},
-		{
-			"name": "香港节点",
-			"type": "url-test",
-			"include-all-providers": true,
-			"filter": "(?i)港|hk|hongkong|hong kong"
-		},
-		{
-			"name": "台湾节点",
-			"type": "url-test",
-			"include-all-providers": true,
-			"filter": "(?i)台|tw|taiwan"
-		},
-		{
-			"name": "美国节点",
-			"type": "url-test",
-			"include-all-providers": true,
-			"filter": "(?i)美|us|unitedstates|united states"
-		},
-		{
-			"name": "新加坡节点",
-			"type": "url-test",
-			"include-all-providers": true,
-			"filter": "(?i)新|sg|singapore"
-		}
-	],
-	"rule-providers": {
-		"domain-geolocation-!cn": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "domain",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list",
-			"path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list"
-		},
-		"domain-sina": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "domain",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sina.list",
-			"path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/sina.list"
-		},
-		"domain-spotify": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "domain",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/spotify.list",
-			"path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/spotify.list"
-		},
-		"domain-youtube": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "domain",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/youtube.list",
-			"path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/youtube.list"
-		},
-		"domain-bilibili": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "domain",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/bilibili.list",
-			"path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/bilibili.list"
-		},
-		"domain-biliintl": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "domain",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/biliintl.list",
-			"path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/biliintl.list"
-		},
-		"domain-telegram": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "domain",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/telegram.list",
-			"path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/telegram.list"
-		},
-		"domain-openai": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "domain",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/openai.list",
-			"path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/openai.list"
-		},
-		"domain-googlefcm": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "domain",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.list",
-			"path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.list"
-		},
-		"domain-ads": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "domain",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ads.list",
-			"path": "./ruleset/DustinWin/ruleset_geodata/clash-ruleset/ads.list"
-		},
-		"classical-DIRECT": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "classical",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/DIRECT.list",
-			"path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/DIRECT.list"
-		},
-		"domain-cn": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "domain",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list",
-			"path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
-		},
-		"ipcidr-cn": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "ipcidr",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list",
-			"path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
-		},
-		"classical-JP": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "classical",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/JP.list",
-			"path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/JP.list"
-		},
-		"classical-HK": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "classical",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/HK.list",
-			"path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/HK.list"
-		},
-		"classical-TW": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "classical",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/TW.list",
-			"path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/TW.list"
-		},
-		"classical-US": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "classical",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/US.list",
-			"path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/US.list"
-		},
-		"classical-SG": {
-			"type": "http",
-			"interval": 86400,
-			"behavior": "classical",
-			"format": "text",
-			"url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/SG.list",
-			"path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/SG.list"
-		}
-	},
-	"rules": [
-		"RULE-SET,domain-ads,广告拦截",
-		"RULE-SET,classical-JP,日本节点",
-		"RULE-SET,classical-HK,香港节点",
-		"RULE-SET,classical-TW,台湾节点",
-		"RULE-SET,classical-US,美国节点",
-		"RULE-SET,classical-SG,新加坡节点",
-		"RULE-SET,domain-sina,Sina",
-		"RULE-SET,domain-spotify,Spotify",
-		"RULE-SET,domain-youtube,YouTube",
-		"RULE-SET,domain-bilibili,哔哩哔哩",
-		"RULE-SET,domain-biliintl,哔哩哔哩",
-		"RULE-SET,domain-telegram,Telegram",
-		"RULE-SET,domain-openai,OpenAi",
-		"RULE-SET,domain-googlefcm,FCM",
-		"RULE-SET,domain-geolocation-!cn,节点选择",
-		"RULE-SET,classical-DIRECT,全球直连",
-		"RULE-SET,domain-cn,全球直连",
-		"RULE-SET,ipcidr-cn,全球直连,no-resolve",
-		"MATCH,漏网之鱼"
-	]
+    "mode": "rule",
+    "mixed-port": 51300,
+    "allow-lan": true,
+    "log-level": "info",
+    "ipv6": true,
+    "secret": "accpetWYN",
+    "external-controller": "127.0.0.1:51225",
+    "find-process-mode": "strict",
+    "global-client-fingerprint": "chrome",
+    "profile": {
+        "store-selected": true,
+        "store-fake-ip": true
+    },
+    "sniffer": {
+        "enable": true,
+        "parse-pure-ip": true,
+        "sniff": {
+            "HTTP": {
+                "ports": [
+                    "80",
+                    "8080-8880"
+                ]
+            },
+            "TLS": {
+                "ports": [
+                    "443",
+                    "8443"
+                ]
+            },
+            "QUIC": {
+                "ports": [
+                    "443",
+                    "8443"
+                ]
+            }
+        },
+        "skip-domain": [
+            "Mijia Cloud"
+        ]
+    },
+    "dns": {
+        "enable": true,
+        "ipv6": true,
+        "prefer-h3": true,
+        "respect-rules": true,
+        "enhanced-mode": "fake-ip",
+        "fake-ip-range": "11.0.0.1/16",
+        "fake-ip-filter": [
+            "*",
+            "+.lan",
+            "+.local",
+            "+.market.xiaomi.com"
+        ],
+        "nameserver": [
+            "https://223.5.5.5/dns-query",
+            "https://120.53.53.53/dns-query"
+        ],
+        "proxy-server-nameserver": [
+            "https://223.5.5.5/dns-query",
+            "https://120.53.53.53/dns-query"
+        ],
+        "nameserver-policy": {
+            "rule-set:domain-cn": [
+                "https://223.5.5.5/dns-query",
+                "https://120.53.53.53/dns-query"
+            ],
+            "rule-set:domain-geolocation-!cn": [
+                "https://8.8.8.8/dns-query",
+                "https://1.1.1.1/dns-query"
+            ],
+            "rule-set:domain-ads": [
+                "rcode://success"
+            ]
+        }
+    },
+    "tun": {
+        "enable": true,
+        "auto-route": true,
+        "auto-detect-interface": true,
+        "strict-route": true,
+        "stack": "system",
+        "device": "Meta",
+        "dns-hijack": [
+            "any:53",
+            "tcp://any:53"
+        ]
+    },
+    "proxy-providers": {
+        "provider": {
+            "type": "http",
+            "interval": 86400,
+            "url": "",
+            "path": "",
+            "health-check": {
+                "enable": true,
+                "url": "https://www.gstatic.com/generate_204",
+                "interval": 300
+            }
+        }
+    },
+    "proxy-groups": [
+        {
+            "name": "节点选择",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "手动切换",
+            "type": "select",
+            "include-all": true
+        },
+        {
+            "name": "Sina",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "Spotify",
+            "type": "select",
+            "proxies": [
+                "DIRECT",
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换"
+            ]
+        },
+        {
+            "name": "YouTube",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "哔哩哔哩",
+            "type": "select",
+            "proxies": [
+                "DIRECT",
+                "台湾节点",
+                "香港节点",
+                "新加坡节点",
+                "日本节点",
+                "美国节点",
+                "节点选择",
+                "手动切换"
+            ]
+        },
+        {
+            "name": "Telegram",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "OpenAi",
+            "type": "select",
+            "proxies": [
+                "美国节点",
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "FCM",
+            "type": "select",
+            "proxies": [
+                "DIRECT",
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换"
+            ]
+        },
+        {
+            "name": "广告拦截",
+            "type": "select",
+            "proxies": [
+                "REJECT",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "全球直连",
+            "type": "select",
+            "proxies": [
+                "DIRECT",
+                "节点选择"
+            ]
+        },
+        {
+            "name": "漏网之鱼",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "日本节点",
+            "type": "url-test",
+            "include-all-providers": true,
+            "filter": "(?i)日本|jp|japan"
+        },
+        {
+            "name": "香港节点",
+            "type": "url-test",
+            "include-all-providers": true,
+            "filter": "(?i)港|hk|hongkong|hong kong"
+        },
+        {
+            "name": "台湾节点",
+            "type": "url-test",
+            "include-all-providers": true,
+            "filter": "(?i)台|tw|taiwan"
+        },
+        {
+            "name": "美国节点",
+            "type": "url-test",
+            "include-all-providers": true,
+            "filter": "(?i)美|us|unitedstates|united states"
+        },
+        {
+            "name": "新加坡节点",
+            "type": "url-test",
+            "include-all-providers": true,
+            "filter": "(?i)新|sg|singapore"
+        }
+    ],
+    "rule-providers": {
+        "domain-geolocation-!cn": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list"
+        },
+        "domain-sina": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sina.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/sina.list"
+        },
+        "domain-spotify": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/spotify.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/spotify.list"
+        },
+        "domain-youtube": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/youtube.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/youtube.list"
+        },
+        "domain-bilibili": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/bilibili.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/bilibili.list"
+        },
+        "domain-biliintl": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/biliintl.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/biliintl.list"
+        },
+        "domain-telegram": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/telegram.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/telegram.list"
+        },
+        "domain-openai": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/openai.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/openai.list"
+        },
+        "domain-googlefcm": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.list"
+        },
+        "domain-ads": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ads.list",
+            "path": "./ruleset/DustinWin/ruleset_geodata/clash-ruleset/ads.list"
+        },
+        "classical-DIRECT": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/DIRECT.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/DIRECT.list"
+        },
+        "domain-cn": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
+        },
+        "ipcidr-cn": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "ipcidr",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
+        },
+        "classical-JP": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/JP.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/JP.list"
+        },
+        "classical-HK": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/HK.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/HK.list"
+        },
+        "classical-TW": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/TW.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/TW.list"
+        },
+        "classical-US": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/US.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/US.list"
+        },
+        "classical-SG": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/SG.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/SG.list"
+        }
+    },
+    "rules": [
+        "RULE-SET,domain-ads,广告拦截",
+        "RULE-SET,classical-JP,日本节点",
+        "RULE-SET,classical-HK,香港节点",
+        "RULE-SET,classical-TW,台湾节点",
+        "RULE-SET,classical-US,美国节点",
+        "RULE-SET,classical-SG,新加坡节点",
+        "RULE-SET,domain-sina,Sina",
+        "RULE-SET,domain-spotify,Spotify",
+        "RULE-SET,domain-youtube,YouTube",
+        "RULE-SET,domain-bilibili,哔哩哔哩",
+        "RULE-SET,domain-biliintl,哔哩哔哩",
+        "RULE-SET,domain-telegram,Telegram",
+        "RULE-SET,domain-openai,OpenAi",
+        "RULE-SET,domain-googlefcm,FCM",
+        "RULE-SET,domain-geolocation-!cn,节点选择",
+        "RULE-SET,classical-DIRECT,全球直连",
+        "RULE-SET,domain-cn,全球直连",
+        "RULE-SET,ipcidr-cn,全球直连,no-resolve",
+        "MATCH,漏网之鱼"
+    ]
 }

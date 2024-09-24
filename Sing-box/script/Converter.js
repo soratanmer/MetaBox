@@ -46,7 +46,7 @@ config.outbounds.forEach(outbound => {
   }
 });
 
-$content = JSON.stringify(config, null, 2)
+$content = JSON.stringify(config, null, 4)
 
 function getTags(proxies, regex) {
   return (regex ? proxies.filter(p => regex.test(p.tag)) : proxies).map(p => p.tag)

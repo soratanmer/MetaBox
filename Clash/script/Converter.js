@@ -22,4 +22,4 @@ $substore.cache.subs.map(sub => {
     }
 })
 
-$content = JSON.stringify(name, null, 4)
+$content = JSON.stringify(config, null, 4)

@@ -22,4 +22,6 @@ $substore.cache.subs.map(sub => {
     }
 })
 
+config['proxy-providers'] = proxyProviders
+
 $content = JSON.stringify(config, null, 4)

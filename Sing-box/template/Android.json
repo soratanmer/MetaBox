@@ -414,6 +414,48 @@
                 "format": "binary",
                 "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs",
                 "download_detour": "全球直连"
+            },
+            {
+                "tag": "DIRECT",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/soratanmer/MetaBox@main/Sing-box/rules/DIRECT.json",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "HK",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/soratanmer/MetaBox@main/Sing-box/rules/HK.json",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "JP",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/soratanmer/MetaBox@main/Sing-box/rules/JP.json",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "SG",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/soratanmer/MetaBox@main/Sing-box/rules/SG.json",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "TW",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/soratanmer/MetaBox@main/Sing-box/rules/TW.json",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "US",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/soratanmer/MetaBox@main/Sing-box/rules/US.json",
+                "download_detour": "全球直连"
             }
         ],
         "rules": [
@@ -457,13 +499,34 @@
                 "outbound": "FCM"
             },
             {
+                "rule_set": "JP",
+                "outbound": "日本节点"
+            },
+            {
+                "rule_set": "HK",
+                "outbound": "香港节点"
+            },
+            {
+                "rule_set": "SG",
+                "outbound": "新加坡节点"
+            },
+            {
+                "rule_set": "TW",
+                "outbound": "台湾节点"
+            },
+            {
+                "rule_set": "US",
+                "outbound": "美国节点"
+            },
+            {
                 "rule_set": "ads",
                 "outbound": "广告拦截"
             },
             {
                 "rule_set": [
                     "GEOIP-CN",
-                    "GEOSITE-CN"
+                    "GEOSITE-CN",
+                    "DIRECT"
                 ],
                 "outbound": "全球直连"
             },

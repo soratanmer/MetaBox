@@ -191,6 +191,48 @@
             ]
         },
         {
+            "name": "Google",
+            "type": "select",
+            "proxies": [
+                "美国节点",
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "Microsoft",
+            "type": "select",
+            "proxies": [
+                "美国节点",
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "Apple",
+            "type": "select",
+            "proxies": [
+                "美国节点",
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
             "name": "FCM",
             "type": "select",
             "proxies": [
@@ -322,6 +364,14 @@
             "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/telegram.list",
             "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/telegram.list"
         },
+        "ipcidr-telegram": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "ipcidr",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.list"
+        },
         "domain-openai": {
             "type": "http",
             "interval": 86400,
@@ -329,6 +379,38 @@
             "format": "text",
             "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/openai.list",
             "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/openai.list"
+        },
+        "domain-google": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list"
+        },
+        "ipcidr-google": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "ipcidr",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
+        },
+        "domain-microsoft": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.list"
+        },
+        "domain-apple": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.list"
         },
         "domain-googlefcm": {
             "type": "http",
@@ -424,7 +506,12 @@
         "RULE-SET,domain-bilibili,哔哩哔哩",
         "RULE-SET,domain-biliintl,哔哩哔哩",
         "RULE-SET,domain-telegram,Telegram",
+        "RULE-SET,ipcidr-telegram,Telegram,no-resolve",
         "RULE-SET,domain-openai,OpenAi",
+        "RULE-SET,domain-google,Google",
+        "RULE-SET,ipcidr-google,Google,no-resolve",
+        "RULE-SET,domain-microsoft,Microsoft",
+        "RULE-SET,domain-apple,Apple",
         "RULE-SET,domain-googlefcm,FCM",
         "RULE-SET,domain-geolocation-!cn,节点选择",
         "RULE-SET,classical-DIRECT,全球直连",

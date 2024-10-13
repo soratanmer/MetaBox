@@ -57,11 +57,11 @@
                 "server": "remote-dns"
             },
             {
-                "rule_set": "GEOSITE-CN",
+                "rule_set": "geosite_cn",
                 "server": "local-dns"
             },
             {
-                "rule_set": "GEOLOCATION-!CN",
+                "rule_set": "geosite_geolocation-!cn",
                 "server": "remote-dns"
             }
         ],
@@ -223,6 +223,51 @@
             "default": "direct"
         },
         {
+            "tag": "Google",
+            "type": "selector",
+            "outbounds": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "direct"
+            ],
+            "default": "日本节点"
+        },
+        {
+            "tag": "Microsoft",
+            "type": "selector",
+            "outbounds": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "direct"
+            ],
+            "default": "direct"
+        },
+        {
+            "tag": "Apple",
+            "type": "selector",
+            "outbounds": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "direct"
+            ],
+            "default": "direct"
+        },
+        {
             "tag": "广告拦截",
             "type": "selector",
             "outbounds": [
@@ -332,84 +377,119 @@
     "route": {
         "rule_set": [
             {
-                "tag": "spotify",
+                "tag": "geosite_spotify",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geosite/spotify.srs",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/spotify.srs",
                 "download_detour": "全球直连"
             },
             {
-                "tag": "telegram",
+                "tag": "geosite_telegram",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geosite/telegram.srs",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/telegram.srs",
                 "download_detour": "全球直连"
             },
             {
-                "tag": "openai",
+                "tag": "geoip_telegram",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geosite/openai.srs",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/telegram.srs",
                 "download_detour": "全球直连"
             },
             {
-                "tag": "biliintl",
+                "tag": "geosite_openai",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geosite/biliintl.srs",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs",
                 "download_detour": "全球直连"
             },
             {
-                "tag": "bilibili",
+                "tag": "geosite_biliintl",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geosite/bilibili.srs",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/biliintl.srs",
                 "download_detour": "全球直连"
             },
             {
-                "tag": "youtube",
+                "tag": "geosite_bilibili",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geosite/youtube.srs",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/bilibili.srs",
                 "download_detour": "全球直连"
             },
             {
-                "tag": "sina",
+                "tag": "geosite_youtube",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/youtube.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geosite_sina",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/sina.srs",
                 "download_detour": "全球直连"
             },
             {
-                "tag": "FCM",
+                "tag": "geoip_google",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/google.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geosite_google",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/google.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geosite_microsoft",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/microsoft.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geosite_apple",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/apple.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geosite_googlefcm",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/googlefcm.srs",
                 "download_detour": "全球直连"
             },
             {
-                "tag": "ads",
+                "tag": "geosite_category-ads-all",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://testingcf.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/ads.srs",
+                "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs",
                 "download_detour": "全球直连"
             },
             {
-                "tag": "GEOIP-CN",
+                "tag": "geoip_cn",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs",
                 "download_detour": "全球直连"
             },
             {
-                "tag": "GEOSITE-CN",
+                "tag": "geosite_cn",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs",
                 "download_detour": "全球直连"
             },
             {
-                "tag": "GEOLOCATION-!CN",
+                "tag": "geosite_geolocation-!cn",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs",
@@ -426,49 +506,67 @@
                 "outbound": "GLOBAL"
             },
             {
-                "rule_set": "spotify",
+                "rule_set": "geosite_spotify",
                 "outbound": "Spotify"
             },
             {
-                "rule_set": "telegram",
+                "rule_set": [
+                    "geosite_telegram",
+                    "geoip_telegram"
+                ],
                 "outbound": "Telegram"
             },
             {
-                "rule_set": "openai",
+                "rule_set": "geosite_openai",
                 "outbound": "OpenAi"
             },
             {
                 "rule_set": [
-                    "biliintl",
-                    "bilibili"
+                    "geosite_biliintl",
+                    "geosite_bilibili"
                 ],
                 "outbound": "哔哩哔哩"
             },
             {
-                "rule_set": "youtube",
+                "rule_set": "geosite_youtube",
                 "outbound": "YouTube"
             },
             {
-                "rule_set": "sina",
+                "rule_set": "geosite_sina",
                 "outbound": "Sina"
             },
             {
-                "rule_set": "FCM",
+              "rule_set": [
+                "geoip_google",
+                "geosite_google"
+              ],
+              "outbound": "Google"
+            },
+            {
+              "rule_set": "geosite_microsoft",
+              "outbound": "Microsoft"
+            },
+            {
+              "rule_set": "geosite_apple",
+              "outbound": "Apple"
+            },
+            {
+                "rule_set": "geosite_googlefcm",
                 "outbound": "FCM"
             },
             {
-                "rule_set": "ads",
+                "rule_set": "geosite_category-ads-all",
                 "outbound": "广告拦截"
             },
             {
                 "rule_set": [
-                    "GEOIP-CN",
-                    "GEOSITE-CN"
+                    "geoip_cn",
+                    "geosite_cn"
                 ],
                 "outbound": "全球直连"
             },
             {
-                "rule_set": "GEOLOCATION-!CN",
+                "rule_set": "geosite_geolocation-!cn",
                 "outbound": "节点选择"
             }
         ],

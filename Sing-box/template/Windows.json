@@ -82,8 +82,10 @@
         },
         {
             "type": "tun",
-            "inet4_address": "172.19.0.1/30",
-            "inet6_address": "fdfe:dcba:9876::1/126",
+            "address": [
+                "172.19.0.1/30",
+                "fdfe:dcba:9876::1/126"
+            ],
             "stack": "system",
             "auto_route": true,
             "strict_route": true,
@@ -514,19 +516,19 @@
                 "outbound": "Sina"
             },
             {
-              "rule_set": [
-                "geoip_google",
-                "geosite_google"
-              ],
-              "outbound": "Google"
+                "rule_set": [
+                    "geoip_google",
+                    "geosite_google"
+                ],
+                "outbound": "Google"
             },
             {
-              "rule_set": "geosite_microsoft",
-              "outbound": "Microsoft"
+                "rule_set": "geosite_microsoft",
+                "outbound": "Microsoft"
             },
             {
-              "rule_set": "geosite_apple",
-              "outbound": "Apple"
+                "rule_set": "geosite_apple",
+                "outbound": "Apple"
             },
             {
                 "rule_set": "geosite_category-ads-all",

@@ -110,14 +110,14 @@
             "name": "Sina",
             "type": "select",
             "proxies": [
+                "DIRECT",
                 "日本节点",
                 "香港节点",
                 "台湾节点",
                 "新加坡节点",
                 "美国节点",
                 "节点选择",
-                "手动切换",
-                "DIRECT"
+                "手动切换"
             ]
         },
         {
@@ -304,7 +304,7 @@
             "name": "新加坡节点",
             "type": "url-test",
             "include-all-providers": true,
-            "filter": "(?i)新|sg|singapore"
+            "filter": "(?i)新|狮城|sg|singapore"
         }
     ],
     "rule-providers": {

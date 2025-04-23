@@ -1,0 +1,470 @@
+# sing-box 配置文件，适用于 1.12.0 及以上版本
+
+# 日志配置
+log:
+  level: info # 日志级别，可选 trace, debug, info, warn, error, fatal, panic
+  timestamp: true # 是否在日志中显示时间戳
+
+# 缓存文件配置
+# 在 sing-box 1.12.0 版本中，cache_file 已从 experimental 部分移至配置文件的顶层。
+cache_file:
+  enabled: true # 是否启用缓存文件。启用后，sing-box 会缓存 GeoIP、Geosite 等数据，提高启动速度。
+
+# 实验性功能配置
+# 此部分包含一些可能仍在开发或不保证完全稳定的功能。
+experimental:
+  clash_api:
+    # Clash API 兼容接口配置
+    # 允许使用支持 Clash API 的客户端（如 Clash for Android, ClashX 等）连接 sing-box。
+    external_controller: 127.0.0.1:20123 # API 监听地址和端口。通常监听本地地址。
+    secret: accpetWYN # API 访问密钥。用于保护 API 不被未经授权访问。
+    default_mode: rule # 启动时 Clash 客户端的默认路由模式。可选 rule (规则模式), direct (直连模式), global (全局代理模式)。
+
+# DNS 配置
+# sing-box 1.12+ 版本对 DNS 模块进行了重构和优化，但以下这种定义服务器和通过规则路由查询的方式是标准的。
+dns:
+  servers:
+    # 定义不同的 DNS 服务器供 DNS 规则使用。
+    - tag: remote-dns # 远程 DNS 服务器标签，方便在规则中引用。
+      address: https://dns.google/dns-query # DNS 服务器地址，支持 DoH (https://), DoT (tls://), DoQ (quic://) 等协议。
+      # address_resolver 用于解析此 DNS 服务器的地址（如果 address 是域名而不是 IP）时使用的 sing-box 内部 DNS 服务器。
+      # 例如，如果 address 是 dns.google，sing-box 会使用 remote-resolver-dns 来解析 dns.google 的 IP。
+      address_resolver: remote-resolver-dns
+      # detour 指定连接此 DNS 服务器时使用的出站代理。
+      detour: 节点选择
+      # strategy 字段 (sing-box 1.12+ 新增或加强) 可用于为此服务器的解析设置 IPv4/IPv6 偏好。
+      # 可选值：prefer_ipv4, prefer_ipv6, ipv4_only, ipv6_only。不设置则遵循全局或规则策略。
+      # strategy: prefer_ipv4 # 示例：为此服务器优先返回 IPv4 地址
+    - tag: local-dns # 本地 DNS 服务器标签。
+      address: https://dns.alidns.com/dns-query
+      address_resolver: resolver-dns
+      detour: 全球直连
+    - tag: resolver-dns # 用于解析其他 DNS 服务器地址时使用的直连解析器。
+      address: 223.5.5.5 # 传统 UDP/TCP DNS 地址。
+      detour: 全球直连
+    - tag: remote-resolver-dns # 用于解析其他 DNS 服务器地址时使用的代理解析器。
+      address: 8.8.8.8
+      detour: 节点选择
+    - tag: block # 用于阻止特定域名解析的特殊 DNS 服务器。
+      # rcode://success 返回成功的空响应，告诉客户端域名不存在或不应解析。
+      address: rcode://success
+
+  rules:
+    # 定义 DNS 查询的路由规则。sing-box 会按照顺序匹配规则，第一个匹配到的规则生效。
+    # 这种基于匹配条件 (如 outbound, clash_mode, rule_set) 将 DNS 查询路由到特定服务器 (server) 的方式是 sing-box 1.12+ 中标准的 DNS 规则用法。
+    - outbound: any # 匹配所有出站流量相关的 DNS 查询。
+      disable_cache: true # 对此规则匹配的查询禁用缓存。
+      server: local-dns # 将这些查询发送到 local-dns 服务器。
+    - clash_mode: direct # 当 Clash 模式为 direct 时匹配。
+      server: local-dns # 将这些查询发送到 local-dns 服务器。
+    - clash_mode: global # 当 Clash 模式为 global 时匹配。
+      server: remote-dns # 将这些查询发送到 remote-dns 服务器。
+    - rule_set: geosite_cn # 匹配命中 geosite_cn 规则集的域名。
+      server: local-dns # 将这些查询发送到 local-dns 服务器。
+    - rule_set: geosite_geolocation-!cn # 匹配命中 geosite_geolocation-!cn 规则集的域名 (通常是非中国大陆域名)。
+      server: remote-dns # 将这些查询发送到 remote-dns 服务器。
+    # 可以在规则中添加 strategy 字段，覆盖服务器的解析策略。
+    # 例如:
+    # - domain_suffix: example.com
+    #   server: remote-dns
+    #   strategy: ipv6_only # 对于 example.com 域名，强制 remote-dns 优先使用 IPv6
+
+  fakeip:
+    # FakeIP 配置。主要用于 TUN 模式下，将域名解析到 FakeIP 地址，然后根据这些 FakeIP 进行路由。
+    enabled: false # 是否启用 FakeIP。如果使用 TUN 模式并依赖 FakeIP 规则，则需要启用。
+    inet4_range: 11.0.0.1/16 # IPv4 FakeIP 地址段。
+    inet6_range: fc00::/18 # IPv6 FakeIP 地址段。
+
+  independent_cache: false # 是否为每个 DNS 服务器使用独立的缓存。如果设置为 true，不同服务器的解析结果不会共享缓存。
+  final: local-dns # 如果 DNS 查询没有匹配到任何 rules，则使用此服务器进行最终解析。
+
+# 入站连接配置
+inbounds:
+  # 定义 sing-box 监听的入站连接。
+  - type: mixed # 混合入站类型，通常支持 Socks4, Socks5, HTTP 代理。
+    listen: 127.0.0.1 # 监听的 IP 地址。127.0.0.1 表示只监听本地回环地址。
+    listen_port: 20122 # 监听的端口。
+    sniff: true # 启用协议嗅探。sing-box 会尝试识别连接的实际协议 (如 TLS, HTTP)，有助于更精确的路由和处理。
+  - type: tun # TUN (Tunnel) 模式入站，用于实现透明代理。
+    # 在 sing-box 1.12.0 中，原有的 inet4_address 和 inet6_address 字段已合并到 address 列表中。
+    address:
+      - 172.19.0.1/30 # TUN 接口的 IPv4 地址和子网掩码。
+      - fdfe:dcba:9876::1/126 # TUN 接口的 IPv6 地址和子网掩码。
+    stack: system # TUN 堆栈模式。system 表示使用操作系统的网络堆栈。
+    auto_route: true # 自动配置系统的路由表，将流量导向 TUN 接口。
+    strict_route: true # 严格路由模式。只处理被 auto_route 导向 TUN 的流量。
+    sniff: true # 启用协议嗅探。
+    platform:
+      # 平台特定的配置，例如 Android 上的 VpnService 集成。
+      http_proxy:
+        # HTTP 代理配置，通常用于配合 Android 系统的“绕过 VPN 的应用”功能，将这些应用的流量导向 sing-box 的 HTTP 代理。
+        enabled: true # 是否启用此功能。
+        server: 127.0.0.1 # HTTP 代理服务器地址，通常指向上面的 mixed 入站地址。
+        server_port: 20122 # HTTP 代理服务器端口，通常指向上面的 mixed 入站端口。
+
+# 出站连接配置
+# 定义 sing-box 可以使用的出站代理或连接方式。
+outbounds:
+  # 选择器出站，用于根据规则或其他条件选择实际使用的代理节点。
+  - tag: 节点选择 # 选择器标签。
+    type: selector # 类型为 selector。
+    outbounds: # 可供此选择器选择的实际出站节点标签列表。
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 手动切换 # 包含手动切换选择器，允许嵌套。
+      - direct # 包含直连出站。
+    default: 日本节点 # 默认选择的出站标签。
+  - tag: 手动切换 # 用于手动切换节点的选择器。通常在客户端界面中使用。
+    type: selector
+    outbounds: [] # 初始时列表为空，客户端会动态填充可用的节点。
+  # 以下是根据服务或用途分组的选择器示例。
+  # 您需要在 outbounds 列表中补充具体的代理节点配置（如 vless, hysteria2, shadowsocks 等）。
+  # 这些选择器 outbounds 列表中的标签应对应下方或订阅中定义的实际代理节点标签。
+  - tag: Sina
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: direct # Sina 默认直连。
+  - tag: Spotify
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: direct # Spotify 默认直连。
+  - tag: YouTube
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: 日本节点 # YouTube 默认使用 日本节点。
+  - tag: 哔哩哔哩
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: direct # 哔哩哔哩 默认直连。
+  - tag: Telegram
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: 香港节点 # Telegram 默认使用 香港节点。
+  - tag: OpenAi
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: 美国节点 # OpenAi 默认使用 美国节点。
+  - tag: FCM
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: direct # FCM 默认直连。
+  - tag: Google
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: 日本节点 # Google 默认使用 日本节点。
+  - tag: Microsoft
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: direct # Microsoft 默认直连。
+  - tag: Apple
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: direct # Apple 默认直连。
+  - tag: 广告拦截 # 用于广告拦截的selector，通常导向 block
+    type: selector
+    outbounds:
+      - block # 包含 block 出站。
+      - direct # 也包含 direct，作为备选或防止误杀。
+    default: block # 默认阻止。
+  - tag: 全球直连 # 用于需要强制直连的 selector
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: direct # 默认直连。
+  - tag: 漏网之鱼 # 用于未匹配任何路由规则的流量的默认 selector
+    type: selector
+    outbounds:
+      - 日本节点
+      - 香港节点
+      - 台湾节点
+      - 新加坡节点
+      - 美国节点
+      - 节点选择
+      - 手动切换
+      - direct
+    default: 日本节点 # 默认使用 日本节点。
+  # URL 测试出站，用于自动选择延迟最低或可用的节点。
+  # 您需要在 outbounds 列表中填充实际需要进行延迟测试的节点标签。
+  - tag: 日本节点 # URL 测试组标签
+    type: urltest # 类型为 urltest
+    outbounds: [] # 需要添加到此测试组的实际出站节点标签列表，例如：["node1", "node2"]
+    url: https://www.gstatic.com/generate_204 # 用于测试连接的 URL
+    interval: 300s # 测试间隔，例如 300 秒。
+    tolerance: 150 # 测试超时容忍度，超过此延迟的节点会被视为不可用。
+  - tag: 香港节点
+    type: urltest
+    outbounds: []
+    url: https://www.gstatic.com/generate_204
+    interval: 300s
+    tolerance: 150
+  - tag: 台湾节点
+    type: urltest
+    outbounds: []
+    url: https://www.gstatic.com/generate_204
+    interval: 300s
+    tolerance: 150
+  - tag: 美国节点
+    type: urltest
+    outbounds: []
+    url: https://www.gstatic.com/generate_204
+    interval: 300s
+    tolerance: 150
+  - tag: 新加坡节点
+    type: urltest
+    outbounds: []
+    url: https://www.gstatic.com/generate_204
+    interval: 300s
+    tolerance: 150
+  - tag: GLOBAL # 一个全局选择器，包含所有主要节点和直连/阻止，方便在路由规则中作为全局代理选项。
+    type: selector
+    outbounds:
+      - 日本节点 # 可以包含其他的 URL 测试组或具体的节点。
+      - 香港节点
+      - 台湾节点
+      - 美国节点
+      - 新加坡节点
+      - 节点选择 # 可以包含其他的选择器。
+      - 手动切换
+      - direct
+      - block
+    default: 日本节点 # 默认选择。
+  # 特殊的出站类型，通常在路由规则中直接引用。
+  - type: direct # 直接连接，不使用任何代理。
+    tag: direct # 标签为 direct。
+  - type: dns # 将流量发送给 DNS 服务器。主要用于将 DNS 查询流量本身路由出去。
+    tag: dns-out # 标签为 dns-out。
+  - type: block # 阻止连接。
+    tag: block # 标签为 block。
+
+# 路由配置
+# 定义流量如何根据匹配条件被导向不同的出站连接。
+route:
+  rule_set:
+    # 定义规则集，通常用于加载 GeoIP 和 Geosite 数据。
+    # 在 sing-box 1.12+ 版本中，GeoIP 和 Geosite 数据是通过 rule_set 的形式来加载和引用的。
+    - tag: geosite_spotify # 规则集标签。
+      type: remote # 规则集类型，remote 表示从远程 URL 下载。
+      format: binary # 规则集文件格式，通常为 binary。
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/spotify.srs # 规则集文件的下载地址。
+      download_detour: 全球直连 # 下载规则集文件时使用的出站代理。
+    - tag: geosite_telegram
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/telegram.srs
+      download_detour: 全球直连
+    - tag: geoip_telegram
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/telegram.srs
+      download_detour: 全球直连
+    - tag: geosite_openai
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs
+      download_detour: 全球直连
+    - tag: geosite_biliintl
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/biliintl.srs
+      download_detour: 全球直连
+    - tag: geosite_bilibili
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/bilibili.srs
+      download_detour: 全球直连
+    - tag: geosite_youtube
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/youtube.srs
+      download_detour: 全球直连
+    - tag: geosite_sina
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/sina.srs
+      download_detour: 全球直连
+    - tag: geoip_google
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/google.srs
+      download_detour: 全球直连
+    - tag: geosite_google
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/google.srs
+      download_detour: 全球直连
+    - tag: geosite_microsoft
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/microsoft.srs
+      download_detour: 全球直连
+    - tag: geosite_apple
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/apple.srs
+      download_detour: 全球直连
+    - tag: geosite_googlefcm
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/googlefcm.srs
+      download_detour: 全球直连
+    - tag: geosite_category-ads-all # 广告相关的规则集
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs
+      download_detour: 全球直连
+    - tag: geoip_cn # 中国大陆 IP 规则集
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs
+      download_detour: 全球直连
+    - tag: geosite_cn # 中国大陆域名规则集
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs
+      download_detour: 全球直连
+    - tag: geosite_geolocation-!cn # 非中国大陆域名规则集 (基于地理位置判断)
+      type: remote
+      format: binary
+      url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs
+      download_detour: 全球直连
+
+  rules:
+    # 流量路由规则列表。sing-box 会按顺序评估这些规则。
+    - clash_mode: direct # 如果 Clash 模式是 direct，则匹配此规则。
+      outbound: direct # 将流量导向 direct 出站 (即直连)。
+    - clash_mode: global # 如果 Clash 模式是 global，则匹配此规则。
+      outbound: GLOBAL # 将流量导向 GLOBAL 选择器。
+    # 根据规则集匹配域名或 IP，导向不同的出站。
+    # rule_set 可以是单个规则集标签字符串，也可以是多个标签组成的列表。
+    - rule_set: geosite_spotify # 命中 geosite_spotify 规则集中的域名。
+      outbound: Spotify # 将流量导向 Spotify 选择器。
+    - rule_set: # 命中 geosite_telegram 或 geoip_telegram 规则集。
+        - geosite_telegram
+        - geoip_telegram
+      outbound: Telegram # 将流量导向 Telegram 选择器。
+    - rule_set: geosite_openai
+      outbound: OpenAi
+    - rule_set:
+        - geosite_biliintl
+        - geosite_bilibili
+      outbound: 哔哩哔哩
+    - rule_set: geosite_youtube
+      outbound: YouTube
+    - rule_set: geosite_sina
+      outbound: Sina
+    - rule_set:
+        - geoip_google
+        - geosite_google
+      outbound: Google
+    - rule_set: geosite_microsoft
+      outbound: Microsoft
+    - rule_set: geosite_apple
+      outbound: Apple
+    - rule_set: geosite_googlefcm
+      outbound: FCM
+    - rule_set: geosite_category-ads-all # 命中广告规则集。
+      outbound: 广告拦截 # 导向 广告拦截 选择器 (通常会阻止流量)。
+    - rule_set: # 命中 geoip_cn 或 geosite_cn 规则集 (中国大陆 IP 或域名)。
+        - geoip_cn
+        - geosite_cn
+      outbound: 全球直连 # 导向 全球直连 选择器 (通常会直连)。
+    - rule_set: geosite_geolocation-!cn # 命中 geosite_geolocation-!cn (非中国大陆域名)。
+      outbound: 节点选择 # 导向 节点选择 选择器。
+
+  final: 漏网之鱼 # 如果流量没有匹配到前面的任何 rules，则使用此出站标签作为最终目的地。这里导向 漏网之鱼 选择器。
+  auto_detect_interface: true # 自动检测出站接口，有助于在多网卡环境下选择正确的接口。
+
+# 重要提示：
+# 1. 请务必在 outbounds 部分补充 "日本节点", "香港节点", "台湾节点", "新加坡节点", "美国节点" 等具体代理节点的详细配置 (如 type, server, server_port, uuid, network, tls 等)。
+# 2. URL 测试出站 (urltest) 的 outbounds 列表也需要您填写实际参与测试的节点标签。
+# 3. 请检查所有规则集中引用的规则集标签 (tag) 和路由规则中引用的出站标签 (outbound) 是否正确对应。

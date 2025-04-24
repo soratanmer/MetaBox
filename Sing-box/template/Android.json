@@ -17,59 +17,59 @@
         "servers": [
             {
                 "tag": "remote-dns",
-                "address": "https://dns.google/dns-query",
-                "address_resolver": "remote-resolver-dns",
+                "type": "https",
+                "server": "dns.google",
+                "domain_resolver": "remote-resolver-dns",
                 "detour": "节点选择"
             },
             {
                 "tag": "local-dns",
-                "address": "https://dns.alidns.com/dns-query",
-                "address_resolver": "resolver-dns",
+                "type": "https",
+                "server": "dns.alidns.com",
+                "domain_resolver": "resolver-dns",
                 "detour": "全球直连"
             },
             {
                 "tag": "resolver-dns",
-                "address": "223.5.5.5",
+                "type": "udp",
+                "server": "223.5.5.5",
                 "detour": "全球直连"
             },
             {
                 "tag": "remote-resolver-dns",
-                "address": "8.8.8.8",
+                "type": "udp",
+                "server": "8.8.8.8",
                 "detour": "节点选择"
             },
             {
-                "tag": "block",
-                "address": "rcode://success"
+                "tag": "fakeip",
+                "type": "fakeip",
+                "inet4_range": "11.0.0.1/16",
+                "inet6_range": "fc00::/18"
             }
         ],
         "rules": [
             {
-                "outbound": "any",
-                "disable_cache": true,
-                "server": "local-dns"
-            },
-            {
                 "clash_mode": "direct",
+                "action": "route",
                 "server": "local-dns"
             },
             {
                 "clash_mode": "global",
+                "action": "route",
                 "server": "remote-dns"
             },
             {
                 "rule_set": "geosite_cn",
+                "action": "route",
                 "server": "local-dns"
             },
             {
                 "rule_set": "geosite_geolocation-!cn",
+                "action": "route",
                 "server": "remote-dns"
             }
         ],
-        "fakeip": {
-            "enabled": false,
-            "inet4_range": "11.0.0.1/16",
-            "inet6_range": "fc00::/18"
-        },
         "independent_cache": false,
         "final": "local-dns"
     },
@@ -77,8 +77,7 @@
         {
             "type": "mixed",
             "listen": "127.0.0.1",
-            "listen_port": 20122,
-            "sniff": true
+            "listen_port": 20122
         },
         {
             "type": "tun",
@@ -89,7 +88,6 @@
             "stack": "system",
             "auto_route": true,
             "strict_route": true,
-            "sniff": true,
             "platform": {
                 "http_proxy": {
                     "enabled": true,
@@ -270,14 +268,6 @@
             "default": "direct"
         },
         {
-            "tag": "广告拦截",
-            "type": "selector",
-            "outbounds": [
-                "block",
-                "direct"
-            ]
-        },
-        {
             "tag": "全球直连",
             "type": "selector",
             "outbounds": [
@@ -358,25 +348,19 @@
                 "新加坡节点",
                 "节点选择",
                 "手动切换",
-                "direct",
-                "block"
+                "direct"
             ],
             "default": "日本节点"
         },
         {
             "type": "direct",
             "tag": "direct"
-        },
-        {
-            "type": "dns",
-            "tag": "dns-out"
-        },
-        {
-            "type": "block",
-            "tag": "block"
         }
     ],
     "route": {
+        "default_domain_resolver": {
+            "server": "local-dns"
+        },
         "rule_set": [
             {
                 "tag": "geosite_spotify",
@@ -558,7 +542,7 @@
             },
             {
                 "rule_set": "geosite_category-ads-all",
-                "outbound": "广告拦截"
+                "action": "reject"
             },
             {
                 "rule_set": [
@@ -570,6 +554,13 @@
             {
                 "rule_set": "geosite_geolocation-!cn",
                 "outbound": "节点选择"
+            },
+            {
+                "action": "sniff"
+            },
+            {
+                "protocol": "dns",
+                "action": "hijack-dns"
             }
         ],
         "final": "漏网之鱼",

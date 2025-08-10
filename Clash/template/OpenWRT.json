@@ -3,10 +3,14 @@
     "mixed-port": 51300,
     "allow-lan": true,
     "log-level": "info",
-    "ipv6": true,
+    "ipv6": false,
     "secret": "accpetWYN",
     "external-controller": "0.0.0.0:51225",
+    "external-ui": "/etc/mihomo/ui",
+    "external-ui-name": "zashboard",
+    "external-ui-url": "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
     "global-client-fingerprint": "chrome",
+    "find-process-mode": "off",
     "profile": {
         "store-selected": true,
         "store-fake-ip": true
@@ -40,7 +44,7 @@
     },
     "dns": {
         "enable": true,
-        "ipv6": true,
+        "ipv6": false,
         "prefer-h3": true,
         "respect-rules": true,
         "enhanced-mode": "fake-ip",
@@ -77,9 +81,9 @@
         "enable": true,
         "auto-route": true,
         "auto-detect-interface": true,
+        "auto-redirect": true,
         "strict-route": true,
         "stack": "system",
-        "device": "Meta",
         "dns-hijack": [
             "any:53",
             "tcp://any:53"
@@ -115,7 +119,8 @@
                 "台湾节点",
                 "新加坡节点",
                 "美国节点",
-                "节点选择"
+                "节点选择",
+                "手动切换"
             ]
         },
         {
@@ -231,6 +236,20 @@
             ]
         },
         {
+            "name": "FCM",
+            "type": "select",
+            "proxies": [
+                "DIRECT",
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换"
+            ]
+        },
+        {
             "name": "广告拦截",
             "type": "select",
             "proxies": [
@@ -244,13 +263,6 @@
             "proxies": [
                 "DIRECT",
                 "节点选择"
-            ]
-        },
-        {
-            "name": "直连软件",
-            "type": "select",
-            "proxies": [
-                "全球直连"
             ]
         },
         {
@@ -403,6 +415,14 @@
             "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.list",
             "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.list"
         },
+        "domain-googlefcm": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.list"
+        },
         "domain-ads": {
             "type": "http",
             "interval": 86400,
@@ -434,14 +454,6 @@
             "format": "text",
             "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list",
             "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
-        },
-        "classical-Applications": {
-            "type": "http",
-            "interval": 86400,
-            "behavior": "classical",
-            "format": "text",
-            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/Applications.list",
-            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/Applications.list"
         },
         "classical-JP": {
             "type": "http",
@@ -486,7 +498,6 @@
     },
     "rules": [
         "RULE-SET,domain-ads,广告拦截",
-        "RULE-SET,classical-Applications,直连软件",
         "RULE-SET,classical-JP,日本节点",
         "RULE-SET,classical-HK,香港节点",
         "RULE-SET,classical-TW,台湾节点",
@@ -504,6 +515,7 @@
         "RULE-SET,ipcidr-google,Google,no-resolve",
         "RULE-SET,domain-microsoft,Microsoft",
         "RULE-SET,domain-apple,Apple",
+        "RULE-SET,domain-googlefcm,FCM",
         "RULE-SET,domain-geolocation-!cn,节点选择",
         "RULE-SET,classical-DIRECT,全球直连",
         "RULE-SET,domain-cn,全球直连",

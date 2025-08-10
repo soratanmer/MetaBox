@@ -5,9 +5,11 @@
     "log-level": "info",
     "ipv6": true,
     "secret": "accpetWYN",
-    "external-controller": "127.0.0.1:51225",
-    "find-process-mode": "strict",
-    "global-client-fingerprint": "clash.meta",
+    "external-controller": "0.0.0.0:51225",
+    "external-ui": "/etc/mihomo/ui",
+    "external-ui-name": "zashboard",
+    "external-ui-url": "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
+    "global-client-fingerprint": "chrome",
     "profile": {
         "store-selected": true,
         "store-fake-ip": true

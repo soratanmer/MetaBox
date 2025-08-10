@@ -6,7 +6,7 @@
     "ipv6": false,
     "secret": "accpetWYN",
     "external-controller": "0.0.0.0:51225",
-    "external-ui": "/etc/mihomo/ui",
+    "external-ui": "/etc/nikki/run",
     "external-ui-name": "zashboard",
     "external-ui-url": "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
     "global-client-fingerprint": "chrome",

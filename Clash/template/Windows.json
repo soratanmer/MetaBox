@@ -3,9 +3,12 @@
     "mixed-port": 51300,
     "allow-lan": true,
     "log-level": "info",
-    "ipv6": true,
+    "ipv6": false,
     "secret": "accpetWYN",
     "external-controller": "0.0.0.0:51225",
+    "external-ui": "/etc/mihomo/ui",
+    "external-ui-name": "zashboard",
+    "external-ui-url": "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
     "global-client-fingerprint": "chrome",
     "profile": {
         "store-selected": true,

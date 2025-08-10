@@ -10,3 +10,5 @@ payload:
   - DOMAIN-SUFFIX,netflix.mom
   - DOMAIN-SUFFIX,acg.rip
   - DOMAIN-SUFFIX,feishu.cn
+  - IP-CIDR,10.0.0.0/16
+  - IP-CIDR,192.168.0.0/16

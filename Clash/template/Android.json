@@ -67,9 +67,6 @@
             "rule-set:domain-cn": [
                 "https://223.5.5.5/dns-query",
                 "https://120.53.53.53/dns-query"
-            ],
-            "rule-set:domain-ads": [
-                "rcode://success"
             ]
         }
     },
@@ -246,14 +243,6 @@
             ]
         },
         {
-            "name": "广告拦截",
-            "type": "select",
-            "proxies": [
-                "REJECT",
-                "DIRECT"
-            ]
-        },
-        {
             "name": "全球直连",
             "type": "select",
             "proxies": [
@@ -419,14 +408,6 @@
             "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.list",
             "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.list"
         },
-        "domain-ads": {
-            "type": "http",
-            "interval": 86400,
-            "behavior": "domain",
-            "format": "text",
-            "url": "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ads.list",
-            "path": "./ruleset/DustinWin/ruleset_geodata/clash-ruleset/ads.list"
-        },
         "classical-DIRECT": {
             "type": "http",
             "interval": 86400,
@@ -493,7 +474,6 @@
         }
     },
     "rules": [
-        "RULE-SET,domain-ads,广告拦截",
         "RULE-SET,classical-JP,日本节点",
         "RULE-SET,classical-HK,香港节点",
         "RULE-SET,classical-TW,台湾节点",

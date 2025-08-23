@@ -1,12 +1,11 @@
 {
     "log": {
+        "disabled": false,
         "level": "info",
         "timestamp": true
     },
     "experimental": {
         "clash_api": {
-            "external_controller": "127.0.0.1:20123",
-            "secret": "accpetWYN",
             "default_mode": "rule"
         },
         "cache_file": {
@@ -44,30 +43,33 @@
             {
                 "tag": "fakeip",
                 "type": "fakeip",
-                "inet4_range": "11.0.0.1/16",
+                "inet4_range": "192.168.77.0/16",
                 "inet6_range": "fc00::/18"
             }
         ],
         "rules": [
             {
                 "clash_mode": "direct",
-                "action": "route",
                 "server": "local-dns"
             },
             {
                 "clash_mode": "global",
-                "action": "route",
                 "server": "remote-dns"
             },
             {
                 "rule_set": "geosite_cn",
-                "action": "route",
                 "server": "local-dns"
             },
             {
                 "rule_set": "geosite_geolocation-!cn",
-                "action": "route",
                 "server": "remote-dns"
+            },
+            {
+                "query_type": [
+                    "A",
+                    "AAAA"
+                ],
+                "server": "fakeip"
             }
         ],
         "independent_cache": false,
@@ -76,25 +78,21 @@
     "inbounds": [
         {
             "type": "mixed",
-            "listen": "127.0.0.1",
-            "listen_port": 53291
+            "tag": "mixed-in",
+            "listen": "::",
+            "listen_port": 51283
         },
         {
             "type": "tun",
-            "address": [
-                "172.19.0.0/30",
-                "fdfe:dcba:9876::0/126"
-            ],
+            "tag": "tun-in",
+            "interface_name": "momo",
             "stack": "system",
             "auto_route": true,
             "strict_route": true,
-            "platform": {
-                "http_proxy": {
-                    "enabled": true,
-                    "server": "127.0.0.1",
-                    "server_port": 53291
-                }
-            }
+            "address": [
+                "172.27.0.1/30",
+                "fdfe:dcba:9566::1/126"
+            ]
         }
     ],
     "outbounds": [
@@ -333,8 +331,7 @@
                 "新加坡节点",
                 "节点选择",
                 "手动切换",
-                "direct",
-                "block"
+                "direct"
             ],
             "default": "日本节点"
         },
@@ -347,6 +344,7 @@
         "default_domain_resolver": {
             "server": "remote-dns"
         },
+        "final": "漏网之鱼",
         "rule_set": [
             {
                 "tag": "geosite_spotify",
@@ -471,6 +469,17 @@
                 "outbound": "GLOBAL"
             },
             {
+                "action": "sniff"
+            },
+            {
+                "protocol": "dns",
+                "action": "hijack-dns"
+            },
+            {
+                "ip_is_private": true,
+                "outbound": "direct"
+            },
+            {
                 "rule_set": "geosite_spotify",
                 "outbound": "Spotify"
             },
@@ -529,16 +538,7 @@
             {
                 "rule_set": "geosite_geolocation-!cn",
                 "outbound": "节点选择"
-            },
-            {
-                "action": "sniff"
-            },
-            {
-                "protocol": "dns",
-                "action": "hijack-dns"
             }
-        ],
-        "final": "漏网之鱼",
-        "auto_detect_interface": true
+        ]
     }
 }

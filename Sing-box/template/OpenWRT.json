@@ -6,7 +6,7 @@
     },
     "experimental": {
         "clash_api": {
-            "external_controller": "127.0.0.1:20123",
+            "external_controller": "0.0.0.0:20123",
             "secret": "accpetWYN",
             "default_mode": "rule",
             "external_ui": "/etc/momo/run/ui",
@@ -14,9 +14,7 @@
             "external_ui_download_detour": "全球直连"
         },
         "cache_file": {
-            "enabled": true,
-            "path": "/etc/momo/run/cache.db",
-            "store_fakeip": true
+            "enabled": true
         }
     },
     "dns": {
@@ -76,7 +74,7 @@
                     "A",
                     "AAAA"
                 ],
-                "server": "remote-dns"
+                "server": "fakeip"
             }
         ],
         "independent_cache": false,
@@ -85,18 +83,20 @@
     "inbounds": [
         {
             "type": "mixed",
-            "listen": "0.0.0.0",
+            "tag": "mixed-in",
+            "listen": "::",
             "listen_port": 51283
         },
         {
             "type": "tun",
+            "tag": "tun-in",
             "interface_name": "momo",
             "stack": "system",
             "auto_route": true,
             "strict_route": true,
             "address": [
-                "172.19.0.0/30",
-                "fdfe:dcba:9876::0/126"
+                "172.27.0.1/30",
+                "fdfe:dcba:9566::1/126"
             ]
         }
     ],

@@ -66,6 +66,7 @@
                 "rewrite_ttl": 1
             }
         ],
+        "strategy": "ipv4_only",
         "independent_cache": true,
         "reverse_mapping": true,
         "final": "remote-dns"

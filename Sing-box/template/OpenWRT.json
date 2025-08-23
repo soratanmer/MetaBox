@@ -60,9 +60,7 @@
             },
             {
                 "rule_set": [
-                    "geosite-cn",
-                    "geosite-steamcn",
-                    "geosite-apple"
+                    "geosite_cn"
                 ],
                 "server": "local"
             },

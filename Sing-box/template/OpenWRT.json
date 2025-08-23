@@ -82,18 +82,19 @@
             "type": "mixed",
             "tag": "mixed-in",
             "listen": "::",
-            "listen_port": 51300
+            "listen_port": 51283
         },
         {
-            "tag": "tun-in",
             "type": "tun",
+            "tag": "tun-in",
             "interface_name": "momo",
+            "stack": "system",
+            "auto_route": true,
+            "strict_route": true,
             "address": [
-                "172.31.0.1/30",
-                "fdfe:dcba:9876::1/126"
-            ],
-            "auto_route": false,
-            "auto_redirect": false
+                "172.27.0.1/30",
+                "fdfe:dcba:9566::1/126"
+            ]
         }
     ],
     "outbounds": [
@@ -485,14 +486,20 @@
         "rules": [
             {
                 "clash_mode": "direct",
-                "outbound": "direct"
+                "outbound": "全球直连"
             },
             {
                 "clash_mode": "global",
                 "outbound": "GLOBAL"
             },
             {
-                "action": "sniff"
+                "action": "sniff",
+                "sniffer": [
+                    "http",
+                    "tls",
+                    "quic",
+                    "dns"
+                ]
             },
             {
                 "protocol": "dns",
@@ -500,7 +507,7 @@
             },
             {
                 "ip_is_private": true,
-                "outbound": "direct"
+                "outbound": "全球直连"
             },
             {
                 "rule_set": "geosite_spotify",

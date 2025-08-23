@@ -59,7 +59,11 @@
                 "action": "reject"
             },
             {
-                "rule_set": "geosite-cn",
+                "rule_set": [
+                    "geosite-cn",
+                    "geosite-steamcn",
+                    "geosite-apple"
+                ],
                 "server": "local"
             },
             {

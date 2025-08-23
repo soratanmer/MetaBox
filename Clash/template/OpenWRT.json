@@ -3,7 +3,7 @@
     "mixed-port": 51300,
     "allow-lan": true,
     "log-level": "info",
-    "ipv6": true,
+    "ipv6": false,
     "secret": "accpetWYN",
     "external-controller": "0.0.0.0:51225",
     "external-ui": "/etc/nikki/run",
@@ -44,7 +44,7 @@
     },
     "dns": {
         "enable": true,
-        "ipv6": true,
+        "ipv6": false,
         "prefer-h3": true,
         "respect-rules": true,
         "enhanced-mode": "fake-ip",

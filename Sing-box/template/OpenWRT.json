@@ -56,9 +56,18 @@
             {
                 "rule_set": "geosite_geolocation-!cn",
                 "server": "remote-dns"
+            },
+            {
+                "query_type": [
+                    "A",
+                    "AAAA"
+                ],
+                "server": "fakeip",
+                "rewrite_ttl": 1
             }
         ],
-        "independent_cache": false,
+        "independent_cache": true,
+        "reverse_mapping": true,
         "final": "remote-dns"
     },
     "inbounds": [

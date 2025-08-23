@@ -14,7 +14,9 @@
             "external_ui_download_detour": "全球直连"
         },
         "cache_file": {
-            "enabled": true
+            "enabled": true,
+            "path": "/etc/momo/run/cache.db",
+            "store_fakeip": true
         }
     },
     "dns": {

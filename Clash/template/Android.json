@@ -44,7 +44,7 @@
         "prefer-h3": true,
         "respect-rules": true,
         "enhanced-mode": "fake-ip",
-        "fake-ip-range": "11.0.0.1/16",
+        "fake-ip-range": "192.168.88.1/16",
         "fake-ip-filter": [
             "*",
             "+.lan",

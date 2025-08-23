@@ -18,27 +18,13 @@
                 "tag": "remote-dns",
                 "type": "https",
                 "server": "dns.google",
-                "domain_resolver": "remote-resolver-dns",
                 "detour": "节点选择"
             },
             {
                 "tag": "local-dns",
                 "type": "https",
                 "server": "dns.alidns.com",
-                "domain_resolver": "resolver-dns",
                 "detour": "全球直连"
-            },
-            {
-                "tag": "resolver-dns",
-                "type": "udp",
-                "server": "223.5.5.5",
-                "detour": "全球直连"
-            },
-            {
-                "tag": "remote-resolver-dns",
-                "type": "udp",
-                "server": "8.8.8.8",
-                "detour": "节点选择"
             },
             {
                 "tag": "fakeip",

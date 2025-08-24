@@ -109,10 +109,11 @@
                 "手动切换",
                 "自动选择",
                 "全球直连"
-            ]
+            ],
+            "default": "日本节点"
         },
         {
-            "tag": "AI",
+            "tag": "Sina",
             "type": "selector",
             "outbounds": [
                 "节点选择",
@@ -124,7 +125,24 @@
                 "手动切换",
                 "自动选择",
                 "全球直连"
-            ]
+            ],
+            "default": "全球直连"
+        },
+        {
+            "tag": "哔哩哔哩",
+            "type": "selector",
+            "outbounds": [
+                "节点选择",
+                "日本节点",
+                "香港节点",
+                "新加坡节点",
+                "台湾节点",
+                "美国节点",
+                "手动切换",
+                "自动选择",
+                "全球直连"
+            ],
+            "default": "全球直连"
         },
         {
             "tag": "YouTube",
@@ -139,10 +157,11 @@
                 "手动切换",
                 "自动选择",
                 "全球直连"
-            ]
+            ],
+            "default": "日本节点"
         },
         {
-            "tag": "Google",
+            "tag": "Spotify",
             "type": "selector",
             "outbounds": [
                 "节点选择",
@@ -154,7 +173,8 @@
                 "手动切换",
                 "自动选择",
                 "全球直连"
-            ]
+            ],
+            "default": "全球直连"
         },
         {
             "tag": "Telegram",
@@ -169,7 +189,40 @@
                 "手动切换",
                 "自动选择",
                 "全球直连"
-            ]
+            ],
+            "default": "日本节点"
+        },
+        {
+            "tag": "AI",
+            "type": "selector",
+            "outbounds": [
+                "节点选择",
+                "日本节点",
+                "香港节点",
+                "新加坡节点",
+                "台湾节点",
+                "美国节点",
+                "手动切换",
+                "自动选择",
+                "全球直连"
+            ],
+            "default": "美国节点"
+        },
+        {
+            "tag": "Google",
+            "type": "selector",
+            "outbounds": [
+                "节点选择",
+                "日本节点",
+                "香港节点",
+                "新加坡节点",
+                "台湾节点",
+                "美国节点",
+                "手动切换",
+                "自动选择",
+                "全球直连"
+            ],
+            "default": "日本节点"
         },
         {
             "tag": "Microsoft",
@@ -184,7 +237,8 @@
                 "手动切换",
                 "自动选择",
                 "全球直连"
-            ]
+            ],
+            "default": "日本节点"
         },
         {
             "tag": "Apple",
@@ -199,7 +253,8 @@
                 "手动切换",
                 "自动选择",
                 "全球直连"
-            ]
+            ],
+            "default": "日本节点"
         },
         {
             "tag": "漏网之鱼",
@@ -214,7 +269,8 @@
                 "手动切换",
                 "自动选择",
                 "全球直连"
-            ]
+            ],
+            "default": "日本节点"
         },
         {
             "tag": "香港节点",
@@ -265,7 +321,8 @@
                 "自动选择",
                 "漏网之鱼",
                 "全球直连"
-            ]
+            ],
+            "default": "日本节点"
         },
         {
             "tag": "全球直连",
@@ -353,93 +410,136 @@
                 "outbound": "Telegram"
             },
             {
+                "rule_set": "geosite-spotify",
+                "outbound": "Spotify"
+            },
+            {
+                "rule_set": [
+                    "geosite-biliintl",
+                    "geosite-bilibili"
+                ],
+                "outbound": "哔哩哔哩"
+            },
+            {
+                "rule_set": "geosite-sina",
+                "outbound": "Sina"
+            },
+            {
                 "rule_set": "geoip-cn",
                 "outbound": "全球直连"
             }
         ],
         "rule_set": [
             {
+                "tag": "geosite-spotify",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/spotify.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geosite-biliintl",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/biliintl.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geosite-bilibili",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/bilibili.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geosite-sina",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/sina.srs",
+                "download_detour": "全球直连"
+            },
+            {
                 "tag": "geosite-ai",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-!cn.srs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-!cn.srs",
                 "download_detour": "全球直连"
             },
             {
                 "tag": "geosite-youtube",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs",
                 "download_detour": "全球直连"
             },
             {
                 "tag": "geosite-google",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.srs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.srs",
                 "download_detour": "全球直连"
             },
             {
                 "tag": "geosite-microsoft",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/microsoft.srs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/microsoft.srs",
                 "download_detour": "全球直连"
             },
             {
                 "tag": "geosite-apple",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/apple.srs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/apple.srs",
                 "download_detour": "全球直连"
             },
             {
                 "tag": "geosite-telegram",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/telegram.srs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/telegram.srs",
                 "download_detour": "全球直连"
             },
             {
                 "tag": "geosite-!cn",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
                 "download_detour": "全球直连"
             },
             {
                 "tag": "geosite-cn",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/cn.srs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/cn.srs",
                 "download_detour": "全球直连"
             },
             {
                 "tag": "geoip-google",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/google.srs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/google.srs",
                 "download_detour": "全球直连"
             },
             {
                 "tag": "geoip-apple",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geoip/apple.srs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geoip/apple.srs",
                 "download_detour": "全球直连"
             },
             {
                 "tag": "geoip-telegram",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs",
                 "download_detour": "全球直连"
             },
             {
                 "tag": "geoip-cn",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://gh-proxy.com/https://github.com/qljsyph/ruleset-icon/raw/refs/heads/main/sing-box/geoip/China-ASN-combined-ip.srs",
+                "url": "https://github.com/qljsyph/ruleset-icon/raw/refs/heads/main/sing-box/geoip/China-ASN-combined-ip.srs",
                 "download_detour": "全球直连"
             }
         ],

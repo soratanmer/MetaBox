@@ -366,16 +366,24 @@
                 "outbound": "全球直连"
             },
             {
+                "rule_set": "geoip-cn",
+                "outbound": "全球直连"
+            },
+            {
+                "rule_set": "geosite-cn",
+                "outbound": "全球直连"
+            },
+            {
                 "clash_mode": "global",
                 "outbound": "GLOBAL"
             },
             {
-                "rule_set": "geosite-ai",
-                "outbound": "AI"
+                "rule_set": "geosite-!cn",
+                "outbound": "节点选择"
             },
             {
-                "rule_set": "geosite-youtube",
-                "outbound": "YouTube"
+                "rule_set": "geoip-google",
+                "outbound": "Google"
             },
             {
                 "rule_set": "geosite-google",
@@ -386,28 +394,24 @@
                 "outbound": "Microsoft"
             },
             {
+                "rule_set": "geoip-apple",
+                "outbound": "Apple"
+            },
+            {
+                "rule_set": "geosite-youtube",
+                "outbound": "YouTube"
+            },
+            {
+                "rule_set": "geosite-ai",
+                "outbound": "AI"
+            },
+            {
                 "rule_set": "geosite-apple",
                 "outbound": "Apple"
             },
             {
                 "rule_set": "geosite-telegram",
                 "outbound": "Telegram"
-            },
-            {
-                "rule_set": "geosite-!cn",
-                "outbound": "节点选择"
-            },
-            {
-                "rule_set": "geosite-cn",
-                "outbound": "全球直连"
-            },
-            {
-                "rule_set": "geoip-google",
-                "outbound": "Google"
-            },
-            {
-                "rule_set": "geoip-apple",
-                "outbound": "Apple"
             },
             {
                 "rule_set": "geoip-telegram",
@@ -427,10 +431,6 @@
             {
                 "rule_set": "geosite-sina",
                 "outbound": "Sina"
-            },
-            {
-                "rule_set": "geoip-cn",
-                "outbound": "全球直连"
             }
         ],
         "rule_set": [

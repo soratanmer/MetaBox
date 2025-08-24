@@ -15,8 +15,12 @@
             "external_ui": "/etc/momo/run/ui",
             "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
             "external_ui_download_detour": "全球直连",
-            "secret": "",
-            "default_mode": "rule"
+            "secret": "accpetWYN",
+            "default_mode": "rule",
+            "access_control_allow_origin": [
+                "*"
+            ],
+            "access_control_allow_private_network": true
         }
     },
     "dns": {

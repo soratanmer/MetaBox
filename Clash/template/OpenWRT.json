@@ -9,6 +9,12 @@
     "external-ui": "/etc/nikki/run",
     "external-ui-name": "zashboard",
     "external-ui-url": "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
+    "external-controller-cors": {
+        "allow-origins": [
+            "*"
+        ],
+        "allow-private-network": true
+    },
     "global-client-fingerprint": "chrome",
     "find-process-mode": "off",
     "profile": {

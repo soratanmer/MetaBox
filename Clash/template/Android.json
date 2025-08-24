@@ -6,6 +6,12 @@
     "ipv6": true,
     "secret": "accpetWYN",
     "external-controller": "0.0.0.0:51225",
+    "external-controller-cors": {
+        "allow-origins": [
+            "*"
+        ],
+        "allow-private-network": true
+    },
     "global-client-fingerprint": "chrome",
     "profile": {
         "store-selected": true,

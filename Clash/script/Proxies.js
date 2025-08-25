@@ -13,39 +13,39 @@ let proxies = await produceArtifact({
   produceType: 'internal',
 })
 
-config.outbounds.push(...proxies)
+config.proxies.push(...proxies)
 
-config.outbounds.map(i => {
+config.proxies.map(i => {
   if (['手动切换'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies))
+    i.proxies.push(...getTags(proxies))
   }
   if (['自动选择'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies))
+    i.proxies.push(...getTags(proxies))
   }
   if (['香港节点'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /港|hk|hongkong|kong kong|🇭🇰/i))
+    i.proxies.push(...getTags(proxies, /港|hk|hongkong|Hong kong|🇭🇰/i))
   }
   if (['台湾节点'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /台|tw|taiwan|🇹🇼|taipei/i))
+    i.proxies.push(...getTags(proxies, /台|tw|taiwan|🇹🇼|taipei/i))
   }
   if (['日本节点'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /日本|jp|japan|🇯🇵/i))
+    i.proxies.push(...getTags(proxies, /日本|jp|japan|🇯🇵/i))
   }
   if (['新加坡节点'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /^(?!.*(?:us)).*(新|sg|singapore|🇸🇬)/i))
+    i.proxies.push(...getTags(proxies, /^(?!.*(?:us)).*(新|sg|singapore|🇸🇬)/i))
   }
   if (['美国节点'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /美|us|unitedstates|united states|🇺🇸/i))
+    i.proxies.push(...getTags(proxies, /美|us|unitedstates|united states|🇺🇸/i))
   }
 })
 
-config.outbounds.forEach(outbound => {
-  if (Array.isArray(outbound.outbounds) && outbound.outbounds.length === 0) {
+config.proxies.forEach(outbound => {
+  if (Array.isArray(outbound.proxies) && outbound.proxies.length === 0) {
     if (!compatible) {
-      config.outbounds.push(compatible_outbound)
+      config.proxies.push(compatible_outbound)
       compatible = true
     }
-    outbound.outbounds.push(compatible_outbound.tag);
+    outbound.proxies.push(compatible_outbound.tag);
   }
 });
 

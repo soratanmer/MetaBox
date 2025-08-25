@@ -1,0 +1,508 @@
+{
+    "mode": "rule",
+    "mixed-port": 51300,
+    "allow-lan": true,
+    "log-level": "info",
+    "ipv6": true,
+    "secret": "accpetWYN",
+    "external-controller": "0.0.0.0:51225",
+    "external-ui": "/etc/nikki/run",
+    "external-ui-name": "zashboard",
+    "external-ui-url": "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
+    "external-controller-cors": {
+        "allow-origins": [
+            "*"
+        ],
+        "allow-private-network": true
+    },
+    "global-client-fingerprint": "chrome",
+    "profile": {
+        "store-selected": true,
+        "store-fake-ip": true
+    },
+    "sniffer": {
+        "enable": true,
+        "parse-pure-ip": true,
+        "sniff": {
+            "HTTP": {
+                "ports": [
+                    "80",
+                    "8080-8880"
+                ]
+            },
+            "TLS": {
+                "ports": [
+                    "443",
+                    "8443"
+                ]
+            },
+            "QUIC": {
+                "ports": [
+                    "443",
+                    "8443"
+                ]
+            }
+        },
+        "skip-domain": [
+            "Mijia Cloud"
+        ]
+    },
+    "dns": {
+        "enable": true,
+        "ipv6": true,
+        "prefer-h3": true,
+        "respect-rules": true,
+        "enhanced-mode": "fake-ip",
+        "fake-ip-range": "192.168.88.1/16",
+        "fake-ip-filter": [
+            "*",
+            "+.lan",
+            "+.local",
+            "+.market.xiaomi.com"
+        ],
+        "nameserver": [
+            "https://dns.alidns.com/dns-query",
+            "https://sm2.doh.pub/dns-query"
+        ],
+        "proxy-server-nameserver": [
+            "https://dns.alidns.com/dns-query",
+            "https://sm2.doh.pub/dns-query"
+        ],
+        "nameserver-policy": {
+            "rule-set:domain-geolocation-!cn": [
+                "https://dns.google/dns-query",
+                "https://cloudflare-dns.com/dns-query"
+            ],
+            "rule-set:domain-cn": [
+                "https://dns.alidns.com/dns-query",
+                "https://sm2.doh.pub/dns-query"
+            ]
+        }
+    },
+    "tun": {
+        "enable": true,
+        "auto-route": true,
+        "auto-detect-interface": true,
+        "strict-route": true,
+        "stack": "system",
+        "device": "Meta",
+        "dns-hijack": [
+            "any:53",
+            "tcp://any:53"
+        ]
+    },
+    "proxies": [],
+    "proxy-groups": [
+        {
+            "name": "节点选择",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "手动切换",
+            "type": "select",
+            "include-all": true,
+            "proxies":[]
+        },
+        {
+            "name": "Sina",
+            "type": "select",
+            "proxies": [
+                "DIRECT",
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择"
+            ]
+        },
+        {
+            "name": "Spotify",
+            "type": "select",
+            "proxies": [
+                "DIRECT",
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换"
+            ]
+        },
+        {
+            "name": "YouTube",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "哔哩哔哩",
+            "type": "select",
+            "proxies": [
+                "DIRECT",
+                "台湾节点",
+                "香港节点",
+                "新加坡节点",
+                "日本节点",
+                "美国节点",
+                "节点选择",
+                "手动切换"
+            ]
+        },
+        {
+            "name": "Telegram",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "OpenAi",
+            "type": "select",
+            "proxies": [
+                "美国节点",
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "Google",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "Microsoft",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "Apple",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "全球直连",
+            "type": "select",
+            "proxies": [
+                "DIRECT",
+                "节点选择"
+            ]
+        },
+        {
+            "name": "直连软件",
+            "type": "select",
+            "proxies": [
+                "全球直连"
+            ]
+        },
+        {
+            "name": "漏网之鱼",
+            "type": "select",
+            "proxies": [
+                "日本节点",
+                "香港节点",
+                "台湾节点",
+                "新加坡节点",
+                "美国节点",
+                "节点选择",
+                "手动切换",
+                "DIRECT"
+            ]
+        },
+        {
+            "name": "日本节点",
+            "type": "url-test",
+            "include-all-providers": true,
+            "filter": "(?i)日本|jp|japan",
+            "proxies":[]
+        },
+        {
+            "name": "香港节点",
+            "type": "url-test",
+            "include-all-providers": true,
+            "filter": "(?i)港|hk|hongkong|hong kong",
+            "proxies":[]
+        },
+        {
+            "name": "台湾节点",
+            "type": "url-test",
+            "include-all-providers": true,
+            "filter": "(?i)台|tw|taiwan",
+            "proxies":[]
+        },
+        {
+            "name": "美国节点",
+            "type": "url-test",
+            "include-all-providers": true,
+            "filter": "(?i)美|us|unitedstates|united states",
+            "proxies":[]
+        },
+        {
+            "name": "新加坡节点",
+            "type": "url-test",
+            "include-all-providers": true,
+            "filter": "(?i)新|狮城|sg|singapore",
+            "proxies":[]
+        }
+    ],
+    "rule-providers": {
+        "domain-geolocation-!cn": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list"
+        },
+        "domain-sina": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sina.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/sina.list"
+        },
+        "domain-spotify": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/spotify.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/spotify.list"
+        },
+        "domain-youtube": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/youtube.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/youtube.list"
+        },
+        "domain-bilibili": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/bilibili.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/bilibili.list"
+        },
+        "domain-biliintl": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/biliintl.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/biliintl.list"
+        },
+        "domain-telegram": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/telegram.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/telegram.list"
+        },
+        "ipcidr-telegram": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "ipcidr",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.list"
+        },
+        "domain-openai": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/openai.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/openai.list"
+        },
+        "domain-google": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list"
+        },
+        "ipcidr-google": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "ipcidr",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
+        },
+        "domain-microsoft": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.list"
+        },
+        "domain-apple": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.list"
+        },
+        "classical-DIRECT": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/DIRECT.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/DIRECT.list"
+        },
+        "domain-cn": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
+        },
+        "ipcidr-cn": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "ipcidr",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
+        },
+        "classical-Applications": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/Applications.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/Applications.list"
+        },
+        "classical-JP": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/JP.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/JP.list"
+        },
+        "classical-HK": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/HK.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/HK.list"
+        },
+        "classical-TW": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/TW.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/TW.list"
+        },
+        "classical-US": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/US.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/US.list"
+        },
+        "classical-SG": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "classical",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Clash/classical/SG.list",
+            "path": "./ruleset/soratanmer/MetaBox/main/Clash/classical/SG.list"
+        }
+    },
+    "rules": [
+        "RULE-SET,classical-Applications,直连软件",
+        "RULE-SET,classical-JP,日本节点",
+        "RULE-SET,classical-HK,香港节点",
+        "RULE-SET,classical-TW,台湾节点",
+        "RULE-SET,classical-US,美国节点",
+        "RULE-SET,classical-SG,新加坡节点",
+        "RULE-SET,domain-sina,Sina",
+        "RULE-SET,domain-spotify,Spotify",
+        "RULE-SET,domain-youtube,YouTube",
+        "RULE-SET,domain-bilibili,哔哩哔哩",
+        "RULE-SET,domain-biliintl,哔哩哔哩",
+        "RULE-SET,domain-telegram,Telegram",
+        "RULE-SET,ipcidr-telegram,Telegram,no-resolve",
+        "RULE-SET,domain-openai,OpenAi",
+        "RULE-SET,domain-google,Google",
+        "RULE-SET,ipcidr-google,Google,no-resolve",
+        "RULE-SET,domain-microsoft,Microsoft",
+        "RULE-SET,domain-apple,Apple",
+        "RULE-SET,domain-geolocation-!cn,节点选择",
+        "RULE-SET,classical-DIRECT,全球直连",
+        "RULE-SET,domain-cn,全球直连",
+        "RULE-SET,ipcidr-cn,全球直连,no-resolve",
+        "MATCH,漏网之鱼"
+    ]
+}

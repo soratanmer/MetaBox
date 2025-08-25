@@ -4,19 +4,7 @@
     "allow-lan": true,
     "log-level": "info",
     "ipv6": true,
-    "secret": "accpetWYN",
-    "external-controller": "0.0.0.0:51225",
-    "external-ui": "/etc/nikki/run",
-    "external-ui-name": "zashboard",
-    "external-ui-url": "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
-    "external-controller-cors": {
-        "allow-origins": [
-            "*"
-        ],
-        "allow-private-network": true
-    },
     "global-client-fingerprint": "chrome",
-    "find-process-mode": "off",
     "profile": {
         "store-selected": true,
         "store-fake-ip": true
@@ -84,9 +72,9 @@
         "enable": true,
         "auto-route": true,
         "auto-detect-interface": true,
-        "auto-redirect": true,
         "strict-route": true,
         "stack": "system",
+        "device": "Meta",
         "dns-hijack": [
             "any:53",
             "tcp://any:53"
@@ -110,8 +98,7 @@
         {
             "name": "手动切换",
             "type": "select",
-            "include-all": true,
-            "proxies":[]
+            "proxies": []
         },
         {
             "name": "Sina",
@@ -278,37 +265,27 @@
         {
             "name": "日本节点",
             "type": "url-test",
-            "include-all-providers": true,
-            "filter": "(?i)日本|jp|japan",
-            "proxies":[]
+            "proxies": []
         },
         {
             "name": "香港节点",
             "type": "url-test",
-            "include-all-providers": true,
-            "filter": "(?i)港|hk|hongkong|hong kong",
-            "proxies":[]
+            "proxies": []
         },
         {
             "name": "台湾节点",
             "type": "url-test",
-            "include-all-providers": true,
-            "filter": "(?i)台|tw|taiwan",
-            "proxies":[]
+            "proxies": []
         },
         {
             "name": "美国节点",
             "type": "url-test",
-            "include-all-providers": true,
-            "filter": "(?i)美|us|unitedstates|united states",
-            "proxies":[]
+            "proxies": []
         },
         {
             "name": "新加坡节点",
             "type": "url-test",
-            "include-all-providers": true,
-            "filter": "(?i)新|狮城|sg|singapore",
-            "proxies":[]
+            "proxies": []
         }
     ],
     "rule-providers": {

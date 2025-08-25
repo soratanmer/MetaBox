@@ -109,7 +109,6 @@
         {
             "name": "手动切换",
             "type": "select",
-            "include-all": true,
             "proxies":[]
         },
         {
@@ -269,36 +268,26 @@
         {
             "name": "日本节点",
             "type": "url-test",
-            "include-all-providers": true,
-            "filter": "(?i)日本|jp|japan",
             "proxies":[]
         },
         {
             "name": "香港节点",
             "type": "url-test",
-            "include-all-providers": true,
-            "filter": "(?i)港|hk|hongkong|hong kong",
             "proxies":[]
         },
         {
             "name": "台湾节点",
             "type": "url-test",
-            "include-all-providers": true,
-            "filter": "(?i)台|tw|taiwan",
             "proxies":[]
         },
         {
             "name": "美国节点",
             "type": "url-test",
-            "include-all-providers": true,
-            "filter": "(?i)美|us|unitedstates|united states",
             "proxies":[]
         },
         {
             "name": "新加坡节点",
             "type": "url-test",
-            "include-all-providers": true,
-            "filter": "(?i)新|狮城|sg|singapore",
             "proxies":[]
         }
     ],

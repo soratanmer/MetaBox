@@ -26,21 +26,15 @@
     "dns": {
         "servers": [
             {
-                "tag": "local",
-                "type": "udp",
-                "server": "223.5.5.5"
-            },
-            {
-                "tag": "public",
+                "tag": "remote-dns",
                 "type": "https",
-                "server": "dns.alidns.com",
-                "domain_resolver": "local"
-            },
-            {
-                "tag": "foreign",
-                "type": "https",
-                "server": "8.8.8.8",
+                "server": "dns.google",
                 "detour": "节点选择"
+            },
+            {
+                "tag": "local-dns",
+                "type": "https",
+                "server": "dns.alidns.com"
             },
             {
                 "tag": "fakeip",
@@ -52,19 +46,25 @@
         "rules": [
             {
                 "clash_mode": "direct",
-                "server": "local"
+                "server": "local-dns"
             },
             {
                 "clash_mode": "global",
-                "server": "fakeip"
+                "server": "remote-dns"
+            },
+            {
+                "rule_set": "geosite-cn",
+                "action": "route",
+                "server": "local-dns"
+            },
+            {
+                "rule_set": "geosite-!cn",
+                "action": "route",
+                "server": "remote-dns"
             },
             {
                 "query_type": "HTTPS",
                 "action": "reject"
-            },
-            {
-                "rule_set": "geosite-cn",
-                "server": "local"
             },
             {
                 "query_type": [
@@ -75,7 +75,7 @@
                 "rewrite_ttl": 1
             }
         ],
-        "final": "foreign",
+        "final": "remote-dns",
         "independent_cache": true,
         "reverse_mapping": true
     },
@@ -560,7 +560,7 @@
         ],
         "final": "漏网之鱼",
         "default_domain_resolver": {
-            "server": "public"
+            "server": "local-dns"
         }
     }
 }

@@ -47,37 +47,57 @@
             "Mijia Cloud"
         ]
     },
+    "hosts": {
+        "dns.alidns.com": [
+            "223.5.5.5",
+            "223.6.6.6",
+            "2400:3200::1",
+            "2400:3200:baba::1"
+        ],
+        "doh.pub": [
+            "1.12.12.12",
+            "1.12.12.21",
+            "120.53.53.53",
+            "2402:4e00::"
+        ],
+        "dns.google": [
+            "8.8.8.8",
+            "8.8.4.4",
+            "2001:4860:4860::8888",
+            "2001:4860:4860::8844"
+        ],
+        "cloudflare-dns.com": [
+            "1.1.1.1",
+            "1.0.0.1",
+            "2606:4700:4700::1111",
+            "2606:4700:4700::1001"
+        ]
+    },
     "dns": {
         "enable": true,
         "ipv6": true,
         "prefer-h3": true,
         "respect-rules": true,
+        "listen": "0.0.0.0:1053",
         "enhanced-mode": "fake-ip",
         "fake-ip-range": "192.168.88.1/16",
         "fake-ip-filter": [
             "*",
             "+.lan",
-            "+.local",
-            "+.market.xiaomi.com"
+            "+.local"
         ],
         "nameserver": [
-            "https://dns.alidns.com/dns-query",
-            "https://sm2.doh.pub/dns-query"
+            "https://dns.google/dns-query",
+            "https://cloudflare-dns.com/dns-query"
         ],
         "proxy-server-nameserver": [
-            "https://dns.alidns.com/dns-query",
-            "https://sm2.doh.pub/dns-query"
+            "https://dns.google/dns-query",
+            "https://cloudflare-dns.com/dns-query"
         ],
-        "nameserver-policy": {
-            "rule-set:domain-geolocation-!cn": [
-                "https://dns.google/dns-query",
-                "https://cloudflare-dns.com/dns-query"
-            ],
-            "rule-set:domain-cn": [
-                "https://dns.alidns.com/dns-query",
-                "https://sm2.doh.pub/dns-query"
-            ]
-        }
+        "direct-nameserver": [
+            "https://dns.alidns.com/dns-query",
+            "https://doh.pub/dns-query"
+        ]
     },
     "tun": {
         "enable": true,

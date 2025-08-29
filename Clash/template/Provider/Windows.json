@@ -57,8 +57,7 @@
         "doh.pub": [
             "1.12.12.12",
             "1.12.12.21",
-            "120.53.53.53",
-            "2402:4e00::"
+            "120.53.53.53"
         ],
         "dns.google": [
             "8.8.8.8",
@@ -91,8 +90,8 @@
             "https://cloudflare-dns.com/dns-query"
         ],
         "proxy-server-nameserver": [
-            "https://dns.google/dns-query",
-            "https://cloudflare-dns.com/dns-query"
+            "https://dns.alidns.com/dns-query",
+            "https://doh.pub/dns-query"
         ],
         "direct-nameserver": [
             "https://dns.alidns.com/dns-query",

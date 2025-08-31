@@ -18,24 +18,12 @@
             {
                 "tag": "remote-dns",
                 "type": "https",
-                "server": "dns.google",
-                "domain_resolver": "remote-resolver-dns"
+                "server": "8.8.8.8"
             },
             {
                 "tag": "local-dns",
                 "type": "https",
-                "server": "dns.alidns.com",
-                "domain_resolver": "resolver-dns"
-            },
-            {
-                "tag": "resolver-dns",
-                "type": "udp",
                 "server": "223.5.5.5"
-            },
-            {
-                "tag": "remote-resolver-dns",
-                "type": "udp",
-                "server": "8.8.8.8"
             },
             {
                 "tag": "fakeip",
@@ -66,7 +54,6 @@
                 "server": "fakeip"
             }
         ],
-        "strategy": "prefer_ipv4",
         "final": "remote-dns",
         "independent_cache": true,
         "reverse_mapping": true

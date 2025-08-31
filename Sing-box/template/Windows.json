@@ -21,8 +21,7 @@
                 "tag": "remote-dns",
                 "type": "https",
                 "server": "dns.google",
-                "domain_resolver": "remote-resolver-dns",
-                "detour": "节点选择"
+                "domain_resolver": "remote-resolver-dns"
             },
             {
                 "tag": "local-dns",

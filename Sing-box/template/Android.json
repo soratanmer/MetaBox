@@ -66,6 +66,7 @@
                 "server": "fakeip"
             }
         ],
+        "strategy": "prefer_ipv4",
         "final": "remote-dns",
         "independent_cache": true,
         "reverse_mapping": true

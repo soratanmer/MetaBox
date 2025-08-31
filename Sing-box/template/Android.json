@@ -60,11 +60,6 @@
                 "server": "local-dns"
             },
             {
-                "rule_set": "geosite-!cn",
-                "action": "route",
-                "server": "remote-dns"
-            },
-            {
                 "query_type": "HTTPS",
                 "action": "reject"
             },
@@ -83,15 +78,8 @@
     },
     "inbounds": [
         {
-            "type": "mixed",
-            "tag": "mixed-in",
-            "listen": "::",
-            "listen_port": 51300
-        },
-        {
             "tag": "tun-in",
             "type": "tun",
-            "interface_name": "momo",
             "address": [
                 "172.19.0.1/30",
                 "fdfe:dcba:9876::1/126"

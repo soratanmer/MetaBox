@@ -62,11 +62,6 @@
                 "server": "local-dns"
             },
             {
-                "rule_set": "geosite-!cn",
-                "action": "route",
-                "server": "remote-dns"
-            },
-            {
                 "query_type": "HTTPS",
                 "action": "reject"
             },

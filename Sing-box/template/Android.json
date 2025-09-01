@@ -54,6 +54,7 @@
                 "server": "fakeip"
             }
         ],
+        "final": "remote-dns",
         "independent_cache": true,
         "reverse_mapping": true
     },

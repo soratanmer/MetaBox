@@ -313,6 +313,14 @@
         }
     ],
     "rule-providers": {
+        "category-ads-all": {
+            "type": "http",
+            "interval": 86400,
+            "behavior": "domain",
+            "format": "text",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.list",
+            "path": "./ruleset/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.list"
+        },
         "domain-geolocation-!cn": {
             "type": "http",
             "interval": 86400,
@@ -491,6 +499,7 @@
         }
     },
     "rules": [
+        "RULE-SET,category-ads-all,REJECT",
         "RULE-SET,classical-JP,日本节点",
         "RULE-SET,classical-HK,香港节点",
         "RULE-SET,classical-TW,台湾节点",

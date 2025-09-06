@@ -358,6 +358,10 @@
                 "outbound": "GLOBAL"
             },
             {
+                "rule_set": "custom-DIRECT",
+                "outbound": "全球直连"
+            },
+            {
                 "rule_set": [
                     "geoip-cn",
                     "geosite-cn"
@@ -560,6 +564,13 @@
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ads-all.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "custom-DIRECT",
+                "type": "remote",
+                "format": "source",
+                "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Sing-box/rules/DIRECT.json",
                 "download_detour": "全球直连"
             }
         ],

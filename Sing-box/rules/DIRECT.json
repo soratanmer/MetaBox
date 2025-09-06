@@ -1,21 +1,15 @@
 {
-    "version": 1,
-    "rules": [
-      {
-        "domain_suffix": [
-          "freeok.pro",
-          "freeok.vip",
-          "freeoker.com",
-          "ffzy-online5.com",
-          "jsonplayer.com",
-          "ajeee.com",
-          "xxxxx520.com",
-          "lz-cdn14.com",
-          "netflix.mom",
-          "acg.rip",
-          "feishu.cn"
-        ]
-      }
-    ]
-  }
-  
+  "version": 1,
+  "rules": [
+    {
+      "ip_cidr": [
+        "10.0.0.0/16",
+        "192.168.0.0/16"
+      ],
+      "domain_suffix": [
+        "278015.xyz",
+        "sorata.top"
+      ]
+    }
+  ]
+}

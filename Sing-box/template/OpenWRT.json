@@ -358,20 +358,50 @@
                 "outbound": "GLOBAL"
             },
             {
-                "rule_set": "geoip-google",
+                "rule_set": [
+                    "geoip-cn",
+                    "geosite-cn"
+                ],
+                "outbound": "全球直连"
+            },
+            {
+                "rule_set": [
+                    "geoip-cloudflare",
+                    "geosite-cloudflare"
+                ],
+                "outbound": "全球直连"
+            },
+            {
+                "rule_set": [
+                    "geoip-google",
+                    "geosite-google"
+                ],
                 "outbound": "Google"
             },
             {
-                "rule_set": "geosite-google",
-                "outbound": "Google"
+                "rule_set": [
+                    "geoip-apple",
+                    "geosite-apple"
+                ],
+                "outbound": "Apple"
+            },
+            {
+                "rule_set": [
+                    "geosite-telegram",
+                    "geoip-telegram"
+                ],
+                "outbound": "Telegram"
+            },
+            {
+                "rule_set": [
+                    "geosite-biliintl",
+                    "geosite-bilibili"
+                ],
+                "outbound": "哔哩哔哩"
             },
             {
                 "rule_set": "geosite-microsoft",
                 "outbound": "Microsoft"
-            },
-            {
-                "rule_set": "geoip-apple",
-                "outbound": "Apple"
             },
             {
                 "rule_set": "geosite-youtube",
@@ -382,27 +412,8 @@
                 "outbound": "AI"
             },
             {
-                "rule_set": "geosite-apple",
-                "outbound": "Apple"
-            },
-            {
-                "rule_set": "geosite-telegram",
-                "outbound": "Telegram"
-            },
-            {
-                "rule_set": "geoip-telegram",
-                "outbound": "Telegram"
-            },
-            {
                 "rule_set": "geosite-spotify",
                 "outbound": "Spotify"
-            },
-            {
-                "rule_set": [
-                    "geosite-biliintl",
-                    "geosite-bilibili"
-                ],
-                "outbound": "哔哩哔哩"
             },
             {
                 "rule_set": "geosite-sina",
@@ -411,14 +422,6 @@
             {
                 "rule_set": "geosite-!cn",
                 "outbound": "节点选择"
-            },
-            {
-                "rule_set": "geoip-cn",
-                "outbound": "全球直连"
-            },
-            {
-                "rule_set": "geosite-cn",
-                "outbound": "全球直连"
             },
             {
                 "rule_set": "geosite-category-ads-all",
@@ -469,6 +472,13 @@
                 "download_detour": "全球直连"
             },
             {
+                "tag": "geoip-google",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/google.srs",
+                "download_detour": "全球直连"
+            },
+            {
                 "tag": "geosite-google",
                 "type": "remote",
                 "format": "binary",
@@ -480,6 +490,13 @@
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/microsoft.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geoip-apple",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geoip/apple.srs",
                 "download_detour": "全球直连"
             },
             {
@@ -497,6 +514,34 @@
                 "download_detour": "全球直连"
             },
             {
+                "tag": "geoip-telegram",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geoip-cloudflare",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cloudflare.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geosite-cloudflare",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/cloudflare.srs",
+                "download_detour": "全球直连"
+            },
+            {
+                "tag": "geoip-cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs",
+                "download_detour": "全球直连"
+            },
+            {
                 "tag": "geosite-!cn",
                 "type": "remote",
                 "format": "binary",
@@ -508,34 +553,6 @@
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/cn.srs",
-                "download_detour": "全球直连"
-            },
-            {
-                "tag": "geoip-google",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/google.srs",
-                "download_detour": "全球直连"
-            },
-            {
-                "tag": "geoip-apple",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geoip/apple.srs",
-                "download_detour": "全球直连"
-            },
-            {
-                "tag": "geoip-telegram",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs",
-                "download_detour": "全球直连"
-            },
-            {
-                "tag": "geoip-cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://github.com/qljsyph/ruleset-icon/raw/refs/heads/main/sing-box/geoip/China-ASN-combined-ip.srs",
                 "download_detour": "全球直连"
             },
             {

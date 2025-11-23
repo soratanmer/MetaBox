@@ -11,16 +11,16 @@
             "store_fakeip": true
         },
         "clash_api": {
-            "external_controller": "0.0.0.0:9095",
+            "external_controller": "0.0.0.0:51231",
             "external_ui": "/etc/momo/run/ui",
             "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
             "external_ui_download_detour": "全球直连",
             "secret": "accpetWYN",
-            "default_mode": "rule",
             "access_control_allow_origin": [
                 "*"
             ],
-            "access_control_allow_private_network": true
+            "access_control_allow_private_network": true,
+            "default_mode": "rule"
         }
     },
     "dns": {
@@ -73,7 +73,7 @@
             "type": "mixed",
             "tag": "mixed-in",
             "listen": "::",
-            "listen_port": 51300
+            "listen_port": 51311
         },
         {
             "tag": "tun-in",

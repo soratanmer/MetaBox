@@ -10,8 +10,12 @@
             "store_fakeip": true
         },
         "clash_api": {
-            "external_controller": "0.0.0.0:9095",
+            "external_controller": "0.0.0.0:51232",
             "secret": "accpetWYN",
+            "access_control_allow_origin": [
+                "*"
+            ],
+            "access_control_allow_private_network": true,
             "default_mode": "rule"
         }
     },
@@ -65,7 +69,7 @@
             "type": "mixed",
             "tag": "mixed-in",
             "listen": "::",
-            "listen_port": 51300
+            "listen_port": 51312
         },
         {
             "tag": "tun-in",

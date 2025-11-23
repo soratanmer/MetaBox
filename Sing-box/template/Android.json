@@ -10,6 +10,12 @@
             "store_fakeip": true
         },
         "clash_api": {
+            "external_controller": "0.0.0.0:51230",
+            "secret": "accpetWYN",
+            "access_control_allow_origin": [
+                "*"
+            ],
+            "access_control_allow_private_network": true,
             "default_mode": "rule"
         }
     },

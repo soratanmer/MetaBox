@@ -11,7 +11,7 @@
             "store_fakeip": true
         },
         "clash_api": {
-            "external_controller": "0.0.0.0:51231",
+            "external_controller": "0.0.0.0:51230",
             "external_ui": "/etc/momo/run/ui",
             "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
             "external_ui_download_detour": "全球直连",
@@ -73,7 +73,7 @@
             "type": "mixed",
             "tag": "mixed-in",
             "listen": "::",
-            "listen_port": 51311
+            "listen_port": 51310
         },
         {
             "tag": "tun-in",

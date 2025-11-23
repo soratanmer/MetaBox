@@ -1,11 +1,11 @@
 {
     "mode": "rule",
-    "mixed-port": 51301,
+    "mixed-port": 51300,
     "allow-lan": true,
     "log-level": "info",
     "ipv6": true,
     "secret": "accpetWYN",
-    "external-controller": "0.0.0.0:51221",
+    "external-controller": "0.0.0.0:51220",
     "external-ui": "/etc/nikki/run",
     "external-ui-name": "zashboard",
     "external-ui-url": "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",

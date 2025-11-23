@@ -1,11 +1,11 @@
 {
     "mode": "rule",
-    "mixed-port": 51300,
+    "mixed-port": 51302,
     "allow-lan": true,
     "log-level": "info",
     "ipv6": true,
     "secret": "accpetWYN",
-    "external-controller": "0.0.0.0:51220",
+    "external-controller": "0.0.0.0:51222",
     "external-controller-cors": {
         "allow-origins": [
             "*"

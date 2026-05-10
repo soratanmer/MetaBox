@@ -263,27 +263,27 @@
         },
         {
             "tag": "香港节点",
-            "type": "selector",
+            "type": "urltest",
             "outbounds": []
         },
         {
             "tag": "日本节点",
-            "type": "selector",
+            "type": "urltest",
             "outbounds": []
         },
         {
             "tag": "新加坡节点",
-            "type": "selector",
+            "type": "urltest",
             "outbounds": []
         },
         {
             "tag": "美国节点",
-            "type": "selector",
+            "type": "urltest",
             "outbounds": []
         },
         {
             "tag": "台湾节点",
-            "type": "selector",
+            "type": "urltest",
             "outbounds": []
         },
         {

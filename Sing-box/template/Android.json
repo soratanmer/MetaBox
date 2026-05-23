@@ -354,13 +354,6 @@
                 "action": "reject"
             },
             {
-                "rule_set": [
-                    "geoip-cloudflare",
-                    "geosite-cloudflare"
-                ],
-                "outbound": "全球直连"
-            },
-            {
                 "rule_set": "geosite-sina",
                 "outbound": "Sina"
             },
@@ -510,20 +503,6 @@
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs",
-                "download_detour": "全球直连"
-            },
-            {
-                "tag": "geoip-cloudflare",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cloudflare.srs",
-                "download_detour": "全球直连"
-            },
-            {
-                "tag": "geosite-cloudflare",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/cloudflare.srs",
                 "download_detour": "全球直连"
             },
             {

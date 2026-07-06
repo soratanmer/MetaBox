@@ -363,18 +363,6 @@
                 "outbound": "香港节点"
             },
             {
-                "rule_set": "custom-SG",
-                "outbound": "新加坡节点"
-            },
-            {
-                "rule_set": "custom-US",
-                "outbound": "美国节点"
-            },
-            {
-                "rule_set": "custom-TW",
-                "outbound": "台湾节点"
-            },
-            {
                 "rule_set": "custom-DIRECT",
                 "outbound": "全球直连"
             },
@@ -574,27 +562,6 @@
                 "type": "remote",
                 "format": "source",
                 "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Sing-box/rules/HK.json",
-                "download_detour": "全球直连"
-            },
-            {
-                "tag": "custom-SG",
-                "type": "remote",
-                "format": "source",
-                "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Sing-box/rules/SG.json",
-                "download_detour": "全球直连"
-            },
-            {
-                "tag": "custom-TW",
-                "type": "remote",
-                "format": "source",
-                "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Sing-box/rules/TW.json",
-                "download_detour": "全球直连"
-            },
-            {
-                "tag": "custom-US",
-                "type": "remote",
-                "format": "source",
-                "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Sing-box/rules/US.json",
                 "download_detour": "全球直连"
             },
             {

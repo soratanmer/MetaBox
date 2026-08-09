@@ -79,17 +79,6 @@
             "tag": "mixed-in",
             "listen": "::",
             "listen_port": 51310
-        },
-        {
-            "tag": "tun-in",
-            "type": "tun",
-            "interface_name": "momo",
-            "address": [
-                "172.19.0.1/30",
-                "fdfe:dcba:9876::1/126"
-            ],
-            "auto_route": true,
-            "strict_route": true
         }
     ],
     "outbounds": [

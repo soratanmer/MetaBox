@@ -96,18 +96,6 @@
             "https://doh.pub/dns-query"
         ]
     },
-    "tun": {
-        "enable": true,
-        "auto-route": true,
-        "auto-detect-interface": true,
-        "strict-route": true,
-        "stack": "system",
-        "device": "Meta",
-        "dns-hijack": [
-            "any:53",
-            "tcp://any:53"
-        ]
-    },
     "proxies": [],
     "proxy-groups": [
         {

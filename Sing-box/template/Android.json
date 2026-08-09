@@ -11,7 +11,7 @@
         },
         "clash_api": {
             "external_controller": "0.0.0.0:51230",
-            "secret": "accpetWYN",
+            "secret": "foJI3tcUfjgtgGXzY9KDTTZs7_9N3iEo",
             "access_control_allow_origin": [
                 "*"
             ],
@@ -24,12 +24,14 @@
             {
                 "tag": "remote-dns",
                 "type": "https",
-                "server": "8.8.8.8"
+                "server": "8.8.8.8",
+                "detour": "节点选择"
             },
             {
                 "tag": "local-dns",
                 "type": "udp",
-                "server": "223.5.5.5"
+                "server": "223.5.5.5",
+                "detour": "全球直连"
             },
             {
                 "tag": "fakeip",
@@ -41,10 +43,12 @@
         "rules": [
             {
                 "clash_mode": "direct",
+                "action": "route",
                 "server": "local-dns"
             },
             {
                 "clash_mode": "global",
+                "action": "route",
                 "server": "remote-dns"
             },
             {
@@ -57,6 +61,7 @@
                     "A",
                     "AAAA"
                 ],
+                "action": "route",
                 "server": "fakeip"
             }
         ],
@@ -335,26 +340,32 @@
             },
             {
                 "ip_is_private": true,
+                "action": "route",
                 "outbound": "全球直连"
             },
             {
                 "clash_mode": "direct",
+                "action": "route",
                 "outbound": "全球直连"
             },
             {
                 "clash_mode": "global",
+                "action": "route",
                 "outbound": "GLOBAL"
             },
             {
                 "rule_set": "custom-JP",
+                "action": "route",
                 "outbound": "日本节点"
             },
             {
                 "rule_set": "custom-HK",
+                "action": "route",
                 "outbound": "香港节点"
             },
             {
                 "rule_set": "custom-DIRECT",
+                "action": "route",
                 "outbound": "全球直连"
             },
             {
@@ -363,6 +374,7 @@
             },
             {
                 "rule_set": "geosite-sina",
+                "action": "route",
                 "outbound": "Sina"
             },
             {
@@ -370,22 +382,27 @@
                     "geosite-biliintl",
                     "geosite-bilibili"
                 ],
+                "action": "route",
                 "outbound": "哔哩哔哩"
             },
             {
                 "rule_set": "geosite-youtube",
+                "action": "route",
                 "outbound": "YouTube"
             },
             {
                 "rule_set": "geosite-ai",
+                "action": "route",
                 "outbound": "AI"
             },
             {
                 "rule_set": "geosite-spotify",
+                "action": "route",
                 "outbound": "Spotify"
             },
             {
                 "rule_set": "geosite-microsoft",
+                "action": "route",
                 "outbound": "Microsoft"
             },
             {
@@ -393,6 +410,7 @@
                     "geoip-google",
                     "geosite-google"
                 ],
+                "action": "route",
                 "outbound": "Google"
             },
             {
@@ -400,6 +418,7 @@
                     "geoip-apple",
                     "geosite-apple"
                 ],
+                "action": "route",
                 "outbound": "Apple"
             },
             {
@@ -407,10 +426,12 @@
                     "geosite-telegram",
                     "geoip-telegram"
                 ],
+                "action": "route",
                 "outbound": "Telegram"
             },
             {
                 "rule_set": "geosite-!cn",
+                "action": "route",
                 "outbound": "节点选择"
             },
             {
@@ -418,6 +439,7 @@
                     "geoip-cn",
                     "geosite-cn"
                 ],
+                "action": "route",
                 "outbound": "全球直连"
             }
         ],

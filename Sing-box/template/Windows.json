@@ -19,6 +19,12 @@
             "default_mode": "rule"
         }
     },
+    "http_clients": [
+        {
+            "tag": "global-direct",
+            "detour": "全球直连"
+        }
+    ],
     "dns": {
         "servers": [
             {
@@ -453,147 +459,128 @@
                 "tag": "geosite-spotify",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/spotify.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/spotify.srs"
             },
             {
                 "tag": "geosite-biliintl",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/biliintl.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/biliintl.srs"
             },
             {
                 "tag": "geosite-bilibili",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/bilibili.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/bilibili.srs"
             },
             {
                 "tag": "geosite-sina",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/sina.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/sina.srs"
             },
             {
                 "tag": "geosite-ai",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ai-!cn.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ai-!cn.srs"
             },
             {
                 "tag": "geosite-youtube",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/youtube.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/youtube.srs"
             },
             {
                 "tag": "geoip-google",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/google.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/google.srs"
             },
             {
                 "tag": "geosite-google",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/google.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/google.srs"
             },
             {
                 "tag": "geosite-microsoft",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/microsoft.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/microsoft.srs"
             },
             {
                 "tag": "geoip-apple",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geoip/apple.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geoip/apple.srs"
             },
             {
                 "tag": "geosite-apple",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/apple.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/apple.srs"
             },
             {
                 "tag": "geosite-telegram",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/telegram.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/telegram.srs"
             },
             {
                 "tag": "geoip-telegram",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/telegram.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/telegram.srs"
             },
             {
                 "tag": "geoip-cn",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs"
             },
             {
                 "tag": "geosite-!cn",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs"
             },
             {
                 "tag": "geosite-cn",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs"
             },
             {
                 "tag": "geosite-category-ads-all",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs",
-                "download_detour": "全球直连"
+                "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs"
             },
             {
                 "tag": "custom-JP",
                 "type": "remote",
                 "format": "source",
-                "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Sing-box/rules/JP.json",
-                "download_detour": "全球直连"
+                "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Sing-box/rules/JP.json"
             },
             {
                 "tag": "custom-HK",
                 "type": "remote",
                 "format": "source",
-                "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Sing-box/rules/HK.json",
-                "download_detour": "全球直连"
+                "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Sing-box/rules/HK.json"
             },
             {
                 "tag": "custom-DIRECT",
                 "type": "remote",
                 "format": "source",
-                "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Sing-box/rules/DIRECT.json",
-                "download_detour": "全球直连"
+                "url": "https://raw.githubusercontent.com/soratanmer/MetaBox/main/Sing-box/rules/DIRECT.json"
             }
         ],
         "final": "漏网之鱼",
         "auto_detect_interface": true,
         "default_domain_resolver": {
             "server": "local-dns"
-        }
+        },
+        "default_http_client": "global-direct"
     }
 }
